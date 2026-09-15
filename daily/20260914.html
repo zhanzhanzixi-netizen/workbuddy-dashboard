@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html data-page-node-id="pIJKJUSUwtaDWT8kbsYvA2" lang="zh-CN">
+<head data-page-node-id="n4uYIrKGIIuTY5cehPy2c7">
+<meta data-page-node-id="6QVxUdU2LMHiiSE37nMmXi" charset="UTF-8">
+<meta data-page-node-id="1GPDZR8tH8faPWL58JuNg9" content="width=device-width, initial-scale=1.0" name="viewport">
+<title data-page-node-id="oRGQmNDNKQFsBrdVlEuGkD" data-pnid-children="13G18Mw7m66WtmRkzYkDyi">A股高弹性标的每日复盘 · 2026-09-14</title>
+<script data-page-node-id="f4tuFqm4B37RMAwcLY5edO" src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+<style data-page-node-id="MyO3EH2maUwtiiguSxkUWJ" data-pnid-children="MYj3V5nheCDlZm9gU4cvDV">
+  :root {
+    --bg: #f5f7fa; --card: #fff; --border: #e8ecf1;
+    --text: #1f2937; --text-2: #6b7280; --text-3: #9ca3af;
+    --primary: #3b6ef6; --primary-soft: #eaf0fe;
+    --up: #e5484d; --up-bg: rgba(229,72,77,.09);
+    --down: #2e9e5b; --down-bg: rgba(46,158,91,.09);
+    --amber: #f59e0b;
+    --shadow: 0 1px 3px rgba(16,24,40,.06), 0 1px 2px rgba(16,24,40,.04);
+    --radius: 14px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:"PingFang SC","Microsoft YaHei","Segoe UI",system-ui,sans-serif;
+    background:var(--bg); color:var(--text); font-size:14px; line-height:1.6;
+  }
+  .wrap { max-width:1280px; margin:0 auto; padding:24px 28px 40px; }
+
+  /* 头部 */
+  .top {
+    background:linear-gradient(135deg,#3b6ef6 0%,#7c5cff 100%);
+    border-radius:var(--radius); color:#fff;
+    padding:26px 30px; margin-bottom:20px;
+    display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+  }
+  .top h1 { font-size:22px; letter-spacing:.5px; }
+  .top .sub { font-size:13px; opacity:.85; margin-top:4px; }
+  .top .date-box { margin-left:auto; text-align:right; }
+  .top .date-box b { font-size:20px; display:block; }
+  .top .date-box span { font-size:12px; opacity:.85; }
+
+  /* 结论卡 */
+  .tldr {
+    background:var(--card); border:1px solid var(--border);
+    border-left:4px solid var(--primary);
+    border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:18px 22px; margin-bottom:20px;
+  }
+  .tldr h3 { font-size:14px; color:var(--primary); margin-bottom:10px; letter-spacing:1px; }
+  .tldr ul { list-style:none; }
+  .tldr li { padding:4px 0 4px 18px; position:relative; font-size:13.5px; color:var(--text); }
+  .tldr li::before { content:""; position:absolute; left:2px; top:13px; width:6px; height:6px; border-radius:50%; background:var(--primary); }
+
+  /* KPI */
+  .kpi-grid { display:grid; grid-template-columns:repeat(6,1fr); gap:14px; margin-bottom:20px; }
+  .kpi {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:14px 16px; text-align:center;
+  }
+  .kpi .lab { font-size:12px; color:var(--text-2); }
+  .kpi .val { font-size:22px; font-weight:700; margin-top:4px; font-variant-numeric:tabular-nums; }
+  .kpi .chg { font-size:12px; margin-top:2px; font-variant-numeric:tabular-nums; }
+  .up { color:var(--up); } .down { color:var(--down); }
+
+  /* 面板 */
+  .panel {
+    background:var(--card); border:1px solid var(--border);
+    border-radius:var(--radius); box-shadow:var(--shadow);
+    padding:20px 22px; margin-bottom:20px;
+  }
+  .panel-head { display:flex; align-items:center; margin-bottom:14px; flex-wrap:wrap; gap:8px; }
+  .panel-head h3 { font-size:15.5px; font-weight:700; }
+  .panel-head .desc { font-size:12px; color:var(--text-3); }
+  .panel-head .tools { margin-left:auto; display:flex; gap:6px; }
+  .seg { display:flex; background:var(--bg); border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+  .seg button { border:none; background:transparent; padding:5px 14px; font-size:12px; color:var(--text-2); cursor:pointer; }
+  .seg button.on { background:var(--card); color:var(--primary); font-weight:600; box-shadow:var(--shadow); }
+
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:1000px){ .grid-2{grid-template-columns:1fr;} .kpi-grid{grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:640px){ .kpi-grid{grid-template-columns:repeat(2,1fr);} }
+
+  .chart { width:100%; height:340px; }
+  .chart-tall { height:400px; }
+
+  /* 表格 */
+  table { width:100%; border-collapse:collapse; font-size:13px; }
+  thead th {
+    text-align:left; font-size:11.5px; color:var(--text-3); font-weight:500;
+    padding:8px 10px; border-bottom:1px solid var(--border); letter-spacing:.5px; white-space:nowrap;
+  }
+  tbody td { padding:9px 10px; border-bottom:1px solid var(--border); font-variant-numeric:tabular-nums; white-space:nowrap; }
+  tbody tr:last-child td { border-bottom:none; }
+  tbody tr:hover { background:#f8fafd; }
+  .tag { display:inline-block; padding:2px 10px; border-radius:20px; font-size:11.5px; font-weight:500; }
+  .tag.up { background:var(--up-bg); } .tag.down { background:var(--down-bg); }
+  .code { color:var(--text-3); font-size:12px; margin-left:4px; }
+  .bar-mini { display:inline-block; height:6px; border-radius:3px; background:linear-gradient(90deg,#3b6ef6,#7c5cff); vertical-align:middle; }
+
+  /* 连板梯队 */
+  .lianban { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  @media (max-width:900px){ .lianban{grid-template-columns:repeat(2,1fr);} }
+  .lb-card {
+    border:1px solid var(--border); border-radius:10px; padding:12px 14px;
+    background:linear-gradient(180deg,#fff, #fbfcfe);
+  }
+  .lb-card .boards { font-size:20px; font-weight:700; color:var(--up); }
+  .lb-card .nm { font-size:13.5px; font-weight:600; margin-top:2px; }
+  .lb-card .th { font-size:11.5px; color:var(--text-3); margin-top:2px; }
+
+  /* 弹性指标框架 */
+  .frame { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  @media (max-width:900px){ .frame{grid-template-columns:repeat(2,1fr);} }
+  .frame-card { border:1px dashed var(--border); border-radius:10px; padding:14px 16px; background:#fafbfd; }
+  .frame-card b { display:block; font-size:13.5px; margin-bottom:6px; }
+  .frame-card p { font-size:12.5px; color:var(--text-2); }
+
+  .src {
+    margin-top:8px; font-size:11.5px; color:var(--text-3); line-height:1.8;
+  }
+  .src a { color:var(--primary); text-decoration:none; }
+  .disclaimer {
+    margin-top:16px; background:var(--card); border:1px solid var(--border);
+    border-radius:10px; padding:14px 18px; font-size:12px; color:var(--text-2); line-height:1.8;
+  }
+  .section-note { font-size:12.5px; color:var(--text-2); margin-bottom:12px; }
+  .section-note b.warn { color:var(--amber); }
+</style>
+</head>
+<body data-page-node-id="kJZvbbH20WQkLWn1yBpaiD">
+<div data-page-node-id="FeKvn1ppGprpqc3gsXNguk" class="wrap">
+
+  <div data-page-node-id="5LH0q0glcFg11CVcv9PRLs" class="top">
+    <div data-page-node-id="U0WebpFCJViKTIYNUA96SF">
+      <h1 data-page-node-id="KXIdgY6qtDHGV2K0xO2NI2"><!--pnid:Hc0GU0qSTR3rOZcr3tpl8r-->A股高弹性标的每日复盘</h1>
+      <div data-page-node-id="oyb24PUutMEokTjsdVOROJ" class="sub"><!--pnid:Ct9MUSyMryiQ2H21gOJmfs-->振幅 · 换手 · 量比 · 龙虎榜资金 —— 四维弹性监测 | 数据口径：2026-09-14 收盘</div>
+    </div>
+    <div data-page-node-id="LaILRBsndt6YlEB8gOBQyJ" class="date-box">
+      <b data-page-node-id="Sp2Mz8Gbji1xJn2Ib73upn"><!--pnid:KzDb9yQaHqugSQd7RarrLr-->2026-09-14</b>
+      <span data-page-node-id="oLAApmghNVHv6Rwb1YpbAH"><!--pnid:ngPRnvXmgjVjagtVJUYFfn-->周一 · A股已收盘</span>
+    </div>
+  </div>
+
+  <!--pnid:QHONIBKRcLuWqjv6LJsEul--><!-- 首屏结论 -->
+  <div data-page-node-id="vcLQwOjQvaagapACe2lEIp" class="tldr">
+    <h3 data-page-node-id="e4fXoN3GyE4JVN5XX5cnnI"><!--pnid:JqCz0GhxdOKMd7giH4wAwC-->今日复盘要点</h3>
+    <ul data-page-node-id="fs6TP31qh0CyA8vggzTFdk">
+      <li data-page-node-id="PQBbVOxNo82O4oM2JJth82"><b data-page-node-id="yW4YcJaJQfN6Xy2YVNC68U"><!--pnid:UnT5qdjqLoZs2cpYHgJ8MK-->缩量分化日</b><!--pnid:LgYV8HPec4JuEenjacEWgj-->：两市成交 1.63 万亿（年内次低，缩量约 3427 亿），指数普跌但超 3100 股上涨——弹性集中在小盘题材，权重科技（光模块/算力）是主要拖累。</li>
+      <li data-page-node-id="NTggDhaaqCxt2hrAdQQjbz"><b data-page-node-id="GHrz2ijZ7F24FYLLK0cv2n"><!--pnid:BGCEG0EGMliDQ8iu9BzMhs-->振幅之王</b><!--pnid:vi4ZBI649nB0hOMToc3fkn-->：有研硅（688432）振幅 33.64% 冲高回落仅收 +2.06%，典型高波动但资金未接力；万讯自控（300112）振幅 26% + 换手 37%，为"振幅×换手"双高弹性样本。</li>
+      <li data-page-node-id="Lq70ngYcc9BQBaMLsDDy4z"><b data-page-node-id="etWuLmmYanIcDyOUR0cHbj"><!--pnid:HkbfPmJV4hnvFTwXSw42p6-->高弹性主线</b><!--pnid:VYBbkMjHRNBW4QWyudfpjQ-->：PCB/覆铜板（科翔股份 20cm 板 + 龙虎榜净买 8.89 亿居首）、培育钻石（黄河旋风）、CRO（万邦医药/近岸蛋白 20cm 板）三线吸金。</li>
+      <li data-page-node-id="HzCQa9JpXVVBnokkfE3teQ"><b data-page-node-id="SYrwWAb73E4BMmxaVDKqKC"><!--pnid:RcJoqhrQnn3gK54py6Piia-->风险信号</b><!--pnid:d8Sv49RnLNu2PTu8WrpOMl-->：高换手股多空分歧加剧——瑞尔特"天地板"（换手 30.6%）、ST豆神振幅 24.8% 收跌 16.9%；高位人气股（农业/军工）集中退潮，追高需警惕弹性反噬。</li>
+    </ul>
+  </div>
+
+  <!--pnid:l1Vi8iXQMKKoNJEIqRpKgf--><!-- 市场温度 KPI -->
+  <div data-page-node-id="LxP47hdyXXQkbHaKDwml9p" class="kpi-grid">
+    <div data-page-node-id="J12i7TsA100WUMsim5gSat" class="kpi"><div data-page-node-id="MJxjZZRTOIksI7uiUeEt4l" class="lab"><!--pnid:vOMB52LcZ7xgApVTBL9d5t-->上证指数</div><div data-page-node-id="ZvqayrRW91wmACx94Vt3Tm" class="val"><!--pnid:qnMIMnGnH94JOvnttN0c7j-->3885.33</div><div data-page-node-id="6PQrZrvQ9Nr4NFcxu7cLKL" class="chg down"><!--pnid:Qpuqa6itYJ57Hb33bqoKt3-->-0.07%</div></div>
+    <div data-page-node-id="5prX2aalQUraVidIUuFxMK" class="kpi"><div data-page-node-id="Gqz4Y8qGVZWPd7tnct8Jyt" class="lab"><!--pnid:MThxVGjZVxvAbGgCjtsCmB-->创业板指</div><div data-page-node-id="geE8IoIhB5a89HS77PbNNT" class="val"><!--pnid:WbJLZlwrEvPZ2cSkm6mALp-->3285.58</div><div data-page-node-id="xMFppkd7PQbBAVqGy9d7aU" class="chg down"><!--pnid:Hp0q461fHrJbVXAV7gSlo5-->-1.10%</div></div>
+    <div data-page-node-id="Ttq2xfQqur6OIvrNgWo522" class="kpi"><div data-page-node-id="JbjsD7ZEUb7V8zgcSqQIIh" class="lab"><!--pnid:FQzyZ7xrN8qrnhHUmBM3N9-->两市成交</div><div data-page-node-id="oSGL0ehyaQ5RfIJ6G3CjK4" class="val"><!--pnid:p3IUR1WR2vq5PaOjtlVRi1-->1.63<span data-page-node-id="FlpPJRvEPuQMHwgCtZVPbI" style="font-size:13px"><!--pnid:fukFT3q8LPV9DKR7Lk51sb-->万亿</span></div><div data-page-node-id="CtZ9fyejqMFiUE4rGNNh3H" class="chg down"><!--pnid:Azj8T1gPvCc3xAh54rttjH-->缩量 3427 亿 · 年内次低</div></div>
+    <div data-page-node-id="7Z9Umjew1szPkULQCTUh0f" class="kpi"><div data-page-node-id="qYz9b7ZpMOReDSPyN0GfPi" class="lab"><!--pnid:An79peTVVS59adfo5CZPE9-->涨跌家数</div><div data-page-node-id="C0iPloNxsRo561Lko31IBh" class="val"><!--pnid:DJPbmBF80fM8BscSHBN9ip-->3126<span data-page-node-id="UWvLuzA36Yy9We0L3OZbFG" style="font-size:13px"><!--pnid:0WCL0LzmzJGwVa6FORfuVf--> / 2224</span></div><div data-page-node-id="aULm90zndbfBF8gKH7bz6R" class="chg up"><!--pnid:n7kWaYtkufvW1CJCZlo3cD-->上涨占比 56.3%</div></div>
+    <div data-page-node-id="yzXPMhvWQUZwoxya0GShfm" class="kpi"><div data-page-node-id="OiAUuP71Ni4DBlti64CakM" class="lab"><!--pnid:rmUePPSAEiChMWaeUdZdlO-->涨停 / 跌停</div><div data-page-node-id="MIFl0iKE1KsoU4p3yv4Dxo" class="val"><!--pnid:0XjbvOKK83BgPaXdCqbunY-->57 <span data-page-node-id="ILnnY5O7QgMObz5cGOe33f" style="font-size:13px; color:var(--text-3)"><!--pnid:5FU8fldGc1UFR2JlqN2Dal-->/</span><!--pnid:B2uNGrakVeqKRouh8pCUzq--> 18</div><div data-page-node-id="dOlXHXhqo1q05a3cTFMG5v" class="chg" style="color:var(--text-2)"><!--pnid:TlvP8JmFymzdQFFrXeAYlO-->封板率约 65%</div></div>
+    <div data-page-node-id="bWOt8a2YQpTEnBxfybvPbT" class="kpi"><div data-page-node-id="nV6XL3y8ZLBlE8fRcQqN4W" class="lab"><!--pnid:a73OhpAcTrsEQkZlJIX55w-->主力资金</div><div data-page-node-id="mPwLGM43oLNqWvseskS6GW" class="val"><!--pnid:tCGHpFNwoSrGVVqEc6pvNC-->-111.9<span data-page-node-id="Bf7Ccl0ROziJZopwApLHSw" style="font-size:13px"><!--pnid:pKmxfmP4Q5NQXzrwBGgL89-->亿</span></div><div data-page-node-id="QEZGciBz4yu3nLW7xvuZDw" class="chg down"><!--pnid:vMYyus1UWFnbzDTDmmDsb4-->连续第 5 日净流出</div></div>
+  </div>
+
+  <!--pnid:Hwa1XWAXunWDSGk98Sk6bT--><!-- 指数 + 板块 -->
+  <div data-page-node-id="3j9TObCkUxsrjbJKm0BU1K" class="grid-2">
+    <div data-page-node-id="NRQQMKUycRaouRKuPJTI9v" class="panel">
+      <div data-page-node-id="EmS1gX74aWXxfxOx0gegs1" class="panel-head"><h3 data-page-node-id="DUZFy4oSqyrZmfosMDzSbi"><!--pnid:qoSkcoU7o2UJHS7PR9oRMt-->主要指数涨跌幅</h3><span data-page-node-id="kowU1ChoO17O7PbtGlaVhr" class="desc"><!--pnid:7mtlKiYFbcsc0riKoqjYPH-->收盘 · 红涨绿跌</span></div>
+      <div data-page-node-id="v1E0NDzQidz6m8PbfB3ufW" class="chart" id="chartIdx"></div>
+    </div>
+    <div data-page-node-id="IVlu4ctpfqZrK5EpYOZmk4" class="panel">
+      <div data-page-node-id="PU9RQXgLStXwFor19nwbCV" class="panel-head"><h3 data-page-node-id="0LPg70v5GBkHEx06G4Gl9B"><!--pnid:Ii9PU13OQqNQMb6eaj4n6o-->行业与概念板块</h3><span data-page-node-id="BhGjo0vbVkxV9nQByz9BBT" class="desc"><!--pnid:HnyHL6ikE1Sm3GFERwjZOy-->申万一级 / 热门概念</span></div>
+      <div data-page-node-id="taMP2vZTWXRlTxOMGA9CUo" class="chart" id="chartSector"></div>
+    </div>
+  </div>
+
+  <!--pnid:e8RfmKQ8fxvL7Xh7QxQxf6--><!-- 振幅榜 -->
+  <div data-page-node-id="II0GiXoYk9Xk8bzYazqcLU" class="panel">
+    <div data-page-node-id="UjttVdg7RD5LBlxLkfcEjo" class="panel-head">
+      <h3 data-page-node-id="FXBVDMUJ1oxu7t5lIGVSXr"><!--pnid:tUwY2CdDUMII7mlkWoXYl0-->高弹性 · 振幅榜 TOP10</h3>
+      <span data-page-node-id="M1yyVTTSLjEhhZo5b8hUrG" class="desc"><!--pnid:zNpuzQwVWl03xjxCKeIGKj-->振幅 = (当日最高 − 最低) ÷ 昨收，单日弹性核心指标</span>
+      <div data-page-node-id="l5o9pVDGvnAZYUAZG1JJzL" class="tools">
+        <div data-page-node-id="UEzyj68CYheHjn1eyMdoWL" class="seg" id="ampSeg">
+          <button data-page-node-id="piLaddQPrhSXwjv3Uu43sW" class="on" data-v="chart"><!--pnid:2p48fp7g1ND5byU3y3upzR-->图</button>
+          <button data-page-node-id="IxSfe82iJ6b8sguLhELbo8" data-v="table"><!--pnid:LlsVToplJRgJSpw7AswtGZ-->表</button>
+        </div>
+      </div>
+    </div>
+    <div data-page-node-id="f6OkMqkhj4hJs1dTGefpnk" id="ampChartBox"><div data-page-node-id="aXTI63ZkfHavceDhijbQoN" class="chart chart-tall" id="chartAmp"></div></div>
+    <div data-page-node-id="4mzO0kArPpm0PyBeMSIixc" id="ampTableBox" style="display:none">
+      <table data-page-node-id="8VDkwPdFx8C4TorV8XAXqM" id="ampTable"></table>
+    </div>
+    <div data-page-node-id="Mj66kNqePMvfMoFRcNw1T3" class="src"><!--pnid:5t9rMrSFgb2TL0W9NAoFdw-->注：20cm 涨停股（满坤科技、科翔股份、近岸蛋白、*ST益通）涨跌幅制度上限更宽，天然振幅居前；一字板/停牌股振幅失真需剔除。数据：交易所行情，2026-09-14 收盘。</div>
+  </div>
+
+  <!--pnid:yLizmdyareOk2lZ3ThPwDs--><!-- 换手散点 + 龙虎榜 -->
+  <div data-page-node-id="mPd5V8atX2KsSS66s5yoHx" class="grid-2">
+    <div data-page-node-id="ph09H9bnhACMDXMKz90Mlu" class="panel">
+      <div data-page-node-id="8lQajDtDv6Sop7EjpGnAKa" class="panel-head"><h3 data-page-node-id="BkLf4AYSmaKd7KMNky5DMc"><!--pnid:zNNrmR22jAj1MghgHatBOG-->弹性散点图：换手率 × 涨跌幅</h3><span data-page-node-id="s9njASiBDhS2TETTBCZKZC" class="desc"><!--pnid:2zu9tfsTXvJsZ9s1SGZcq6-->气泡大小 = 当日振幅</span></div>
+      <div data-page-node-id="NJbtQ97cRXNMAsF3WWIpZA" class="chart chart-tall" id="chartScatter"></div>
+      <div data-page-node-id="b8uVzxSDnBqFenOluPGKdb" class="src"><!--pnid:hRJMrEfwSuWwPS3thWGD6F-->右上象限（高换手 + 大涨）= 资金驱动的正向弹性；左上/下方高换手下跌股 = 多空分歧警示。</div>
+    </div>
+    <div data-page-node-id="0eLWS7zhbrBI7TOEhdJo9G" class="panel">
+      <div data-page-node-id="f1lH7sQGJYGi3PHO7ttSUe" class="panel-head"><h3 data-page-node-id="aHEtbyfwMgSsRvDQiYSFPQ"><!--pnid:oDjaBqRYUllD0ktOw4SKLf-->龙虎榜资金净流向</h3><span data-page-node-id="jYzdF3hRvJUqKooviZkHFP" class="desc"><!--pnid:K2kc00VDvEZnX3d1I0P1Zp-->单位：亿元 · 2026-09-14</span></div>
+      <div data-page-node-id="uDI4G4EnHaBD70dzpBGFDE" class="chart chart-tall" id="chartLhb"></div>
+    </div>
+  </div>
+
+  <!--pnid:J1UimIp1FGvE5o7p9ky9qm--><!-- 换手榜 -->
+  <div data-page-node-id="EB4zodFMoLM4Y28jo1T0U7" class="panel">
+    <div data-page-node-id="FVMhCB85uxopAj3I7SDlx2" class="panel-head"><h3 data-page-node-id="RnJNx3Kkzr8XrsSj9Ud8sZ"><!--pnid:HAZBjihSJOJKL4CIZHzKAW-->高弹性 · 换手率榜</h3><span data-page-node-id="71xWEp22lkr97BW7m10GlM" class="desc"><!--pnid:QUfsnJySiWEuDQOPThlckR-->换手率 ≥ 20%，筹码高速换手是弹性的前提</span></div>
+    <table data-page-node-id="na1wl2j6S1qIiqdxH0HyU6" id="turnTable"></table>
+    <div data-page-node-id="GzoHI22ohosms9zjzb1BEj" class="src"><!--pnid:mVLdAdK5ijQwZNS7fMuL4G-->注：高换手 ≠ 高弹性——对倒可制造虚假换手，需量价配合验证。北自科技、瑞尔特、高斯贝尔均为高换手下跌，分歧明显。数据：交易所行情 / 龙虎榜，2026-09-14。</div>
+  </div>
+
+  <!--pnid:hcTbPmRS71BWbmgKYR5sHs--><!-- 连板梯队 -->
+  <div data-page-node-id="TFCF4MEzn41hzRYXXsWh3q" class="panel">
+    <div data-page-node-id="n4pZl6CVjZtuseb8YvG6MQ" class="panel-head"><h3 data-page-node-id="jyMxS7QPArPBCWeluxtZBy"><!--pnid:F4x9oPpKIFShn2EFPCtXsS-->连板梯队 · 弹性资金承接</h3><span data-page-node-id="JBnkVb0L79NQo0gu4OMyD9" class="desc"><!--pnid:XsFZJlzJYJSk415Bc6qcQv-->连板高度 4 板 · 晋级率 57.1% · 炸板 39 家</span></div>
+    <div data-page-node-id="GunR1mWZuz7DQ5sz2rYslW" class="lianban" id="lianbanGrid"></div>
+  </div>
+
+  <!--pnid:SDHrZXN2Vow9oUofYjaRQv--><!-- 指标框架 -->
+  <div data-page-node-id="nGlZvXzc4NugezJ4a9U3iY" class="panel">
+    <div data-page-node-id="6awG6XAmcD0Vbl0rNBGP3w" class="panel-head"><h3 data-page-node-id="OW1S7Q4kOn3xDWKvAu2GLK"><!--pnid:cxKl2kZM86pINj6kiQakQv-->高弹性监测指标体系</h3><span data-page-node-id="seyqMlcpzmjCtDI7qmXPB4" class="desc"><!--pnid:HyRywOyd0NLpyrBRhuuyD6-->本页为单日口径；β 系数与年化波动率需 60–120 交易日历史窗口，后续日度复盘可逐日沉淀</span></div>
+    <div data-page-node-id="QBWMi4wwVVsCUAgjssPSEz" class="frame">
+      <div data-page-node-id="pdFMZUUv8W8yY2eqbyIilM" class="frame-card"><b data-page-node-id="szkvKDLQTCbLusUJFaC9Mx"><!--pnid:QmfHWlpHm1KLBg0Sngo2RR-->① 市场敏感度 · β 系数</b><p data-page-node-id="cYes5ERYXr5SAuFoqBhRsg"><!--pnid:IgRGy2ejoDdlcUUTgpTZtS-->个股对沪深300的回归斜率。β≥1.5 高弹性进攻型，&lt;0.8 防御型。跨标的比较须同窗口（60/120日）。</p></div>
+      <div data-page-node-id="0QQcL9RQc2VZl6QBcSVEwT" class="frame-card"><b data-page-node-id="CSay1oXMF9fdjHUG5abdtT"><!--pnid:iDnYPfH8p6vsv34yEM64tD-->② 波动幅度 · 振幅 / HV</b><p data-page-node-id="pyp1CPy4APAyZyQKu2Ee4Z"><!--pnid:OloXyxZIBEgkPJ894NvbVK-->单日振幅&gt;7% 即显著异动；年化波动率&gt;35% 为高波动，&gt;60% 多为题材妖股/次新。</p></div>
+      <div data-page-node-id="BYPQEDKwLpL1NgkqPZvFcS" class="frame-card"><b data-page-node-id="3VloIBfXwQdPEPwZPc7oXn"><!--pnid:MLmIU5u1uIX14nXheIsJCL-->③ 量能活跃 · 换手率 / 量比</b><p data-page-node-id="kKPY4EPLrE2gDmhGxFBkvz"><!--pnid:8j8Pffn7p2eKjHchEdWSq0-->换手 7%–15% 高活跃，&gt;15% 极高（防对倒）；量比&gt;2.5 显著放量，是弹性的放大器。</p></div>
+      <div data-page-node-id="Ku3RkPGeE664WBsnd5em2e" class="frame-card"><b data-page-node-id="3rx766knHB3LmCW9avChGJ"><!--pnid:Ic3K3fBIqpTmzIYGKE1CSG-->④ 区间形态 · 布林带宽</b><p data-page-node-id="MxPprrvkczFuhg06mokCPd"><!--pnid:S7uQ2wrbUbhajEdKlb87fD-->带宽收窄后走阔 = 变盘启动信号，与高弹性启动点共振时意义最大。</p></div>
+    </div>
+    <div data-page-node-id="86Plnv79pkW3sExMQdqsxl" class="section-note" style="margin-top:14px">
+      <b data-page-node-id="rYG9PBMeJ671FLPVPuekGw" class="warn"><!--pnid:QBDipuVP73y2xTCldIzx4i-->风险提示：</b><!--pnid:jw1yC0dBY1hXZlOBTnktKL-->高弹性是双刃剑——今日瑞尔特（002790）涨停开盘炸板走"天地板"（换手 30.6%、振幅 15%+），即是弹性反噬的直接样本。缩量环境下题材轮动快、单日持续性弱，连板高度仅 4 板。
+    </div>
+  </div>
+
+  <!--pnid:UiE9knPhMq4fSoMYG4bEBx--><!-- 大市值对照 -->
+  <div data-page-node-id="EZHq0m2voPUq0OxDq6K9bh" class="panel">
+    <div data-page-node-id="uhVVDvCr1VCTzScWD8mi7s" class="panel-head"><h3 data-page-node-id="64OCLYUbMJcDZnV4HfxDBO"><!--pnid:wlIWTYbur0opyXkSYUDwl2-->权重对照：大市值 ≠ 高弹性</h3><span data-page-node-id="W41UFkwUzHeQOqt2QcXMGh" class="desc"><!--pnid:35DGi18T1zdLg5fFBP1KmY-->成交额居前大票当日普遍低振幅回调</span></div>
+    <table data-page-node-id="UNfrUveRyuXzDqJWhOq32d" id="bigTable"></table>
+    <div data-page-node-id="WK5XYDuutqMjQuCmZdSLab" class="src"><!--pnid:NZ8FN0arF015lQZx6wLgXY-->数据：交易所行情 / 证券时报·数据宝，2026-09-14。</div>
+  </div>
+
+  <div data-page-node-id="m8jeCuBvl9nsncVwkRtVhE" class="disclaimer">
+    <b data-page-node-id="arnMJj7OUzdH0GPvqkVhkV"><!--pnid:CZfbBAT1RJt49YSg0GadEy-->数据来源：</b><!--pnid:1XEJLrCEyGQGO1kLE2VX4U-->交易所行情、沪深交易所龙虎榜、证券时报·数据宝、财联社、每日经济新闻等公开数据，统计口径为 2026-09-14 收盘；个股均为 A 股（6 位代码），主力资金为公开口径估算值，不同数据商口径存在差异（如主力净流出 111.90 亿与 59.42 亿两个口径并存）。<br data-page-node-id="ib7t4KVDB5ycl76fQQ9Azs">
+    <b data-page-node-id="WKgKCTbfyJrlsy15kTVJGt"><!--pnid:TYh7SHjJ4tLJ3Z7wtzoGHL-->免责声明</b><!--pnid:tBbWywoaFUcLdFOabrQYty-->：以上内容基于公开数据和量化分析，仅供参考，不构成投资建议。市场有风险，投资需谨慎。任何投资决策应结合个人风险承受能力、资金状况和投资目标独立判断，必要时咨询持牌专业机构。过往表现不预示未来收益。
+  </div>
+
+</div>
+
+<script data-page-node-id="QMZGvsKhNIpw0pBFHl8iLJ" data-pnid-children="HbBQxOgFp5B7I1WXSbXGOW">
+var UP = '#e5484d', DOWN = '#2e9e5b';
+
+var DATA = {
+  indices: [
+    { name: '上证指数', chg: -0.07, amp: 0.73 },
+    { name: '深证成指', chg: -0.64, amp: 1.58 },
+    { name: '创业板指', chg: -1.10, amp: 2.06 },
+    { name: '科创50',   chg: -1.62, amp: 1.66 },
+    { name: '沪深300',  chg: -0.67, amp: 0.69 },
+    { name: '中证500',  chg: -0.12, amp: 1.62 },
+    { name: '中证1000', chg: 0.55,  amp: 2.31 }
+  ],
+  sectors: [
+    { name: '医药生物', v: 2.22 }, { name: '汽车', v: 0.97 },
+    { name: '银行', v: 0.83 }, { name: '电力设备', v: 0.80 },
+    { name: '农林牧渔', v: -1.50 }, { name: '国防军工', v: -1.70 },
+    { name: '通信', v: -2.91 },
+    { name: '靶材(概念)', v: 5.38 }, { name: 'CRO(概念)', v: 4.89 },
+    { name: '培育钻石(概念)', v: 4.77 }, { name: '陶瓷基板(概念)', v: 4.55 },
+    { name: '种植业(细分)', v: -3.19 }, { name: '军工装备(细分)', v: -2.47 },
+    { name: '教育(细分)', v: -2.21 }, { name: '煤炭开采(细分)', v: -1.50 }
+  ],
+  ampTop: [
+    { name: '有研硅', code: '688432', price: 46.15, chg: 2.06, amp: 33.64, turn: 6.32, vr: 1.28, mcap: 577 },
+    { name: '万讯自控', code: '300112', price: 10.46, chg: 14.82, amp: 26.02, turn: 37.08, vr: 1.83, mcap: 31 },
+    { name: '满坤科技', code: '301132', price: 58.37, chg: 20.00, amp: 25.27, turn: 17.51, vr: 1.70, mcap: 86 },
+    { name: 'ST豆神', code: '300010', price: 4.49, chg: -16.85, amp: 24.81, turn: 14.99, vr: 1.36, mcap: 93 },
+    { name: '科翔股份', code: '300903', price: 108.30, chg: 20.00, amp: 23.05, turn: 9.93, vr: 1.50, mcap: 472 },
+    { name: '新益昌', code: '688383', price: 142.77, chg: 16.55, amp: 22.91, turn: 5.14, vr: 1.99, mcap: 145 },
+    { name: '近岸蛋白', code: '688137', price: 76.80, chg: 20.00, amp: 22.33, turn: 13.03, vr: 1.35, mcap: 54 },
+    { name: '英诺激光', code: '301021', price: 86.22, chg: 15.73, amp: 21.07, turn: 11.90, vr: 1.79, mcap: 132 },
+    { name: '多浦乐', code: '301528', price: 73.00, chg: 19.38, amp: 21.03, turn: 12.49, vr: 4.52, mcap: 66 },
+    { name: '*ST益通', code: '300430', price: 5.58, chg: 20.00, amp: 20.22, turn: 14.00, vr: 4.32, mcap: 15 }
+  ],
+  scatter: [
+    { name: '万邦医药', turn: 38.71, chg: 20.00, amp: 17.55 },
+    { name: '万讯自控', turn: 37.08, chg: 14.82, amp: 26.02 },
+    { name: '桂林旅游', turn: 33.72, chg: 10.03, amp: 5.33 },
+    { name: '澳洋健康', turn: 31.51, chg: 10.09, amp: 10.09 },
+    { name: '瑞尔特', turn: 30.63, chg: -9.99, amp: 15.00 },
+    { name: '马矿股份', turn: 29.97, chg: 10.03, amp: 11.12 },
+    { name: '黄河旋风', turn: 23.74, chg: 9.98, amp: 15.00 },
+    { name: '满坤科技', turn: 17.51, chg: 20.00, amp: 25.27 },
+    { name: '科翔股份', turn: 9.93, chg: 20.00, amp: 23.05 },
+    { name: '有研硅', turn: 6.32, chg: 2.06, amp: 33.64 },
+    { name: 'ST豆神', turn: 14.99, chg: -16.85, amp: 24.81 },
+    { name: '近岸蛋白', turn: 13.03, chg: 20.00, amp: 22.33 },
+    { name: '多浦乐', turn: 12.49, chg: 19.38, amp: 21.03 },
+    { name: '英诺激光', turn: 11.90, chg: 15.73, amp: 21.07 }
+  ],
+  lhb: [
+    { name: '科翔股份', v: 8.89 }, { name: '黄河旋风', v: 5.85 },
+    { name: '嘉立创(3日)', v: 4.36 }, { name: '豫能控股', v: 3.51 },
+    { name: '意华股份', v: 3.22 }, { name: '远望谷', v: -0.52 },
+    { name: '瑞尔特', v: -0.74 }, { name: '高凯技术', v: -0.87 },
+    { name: '博敏电子', v: -0.95 }, { name: '有研硅', v: -2.03 }
+  ],
+  turnTop: [
+    { name: '万邦医药', code: '301520', chg: 20.00, turn: 38.71, note: '20cm涨停 · CRO · 机构净买3809万（有分歧）' },
+    { name: '万讯自控', code: '300112', chg: 14.82, turn: 37.08, note: '机构净买7828万' },
+    { name: '桂林旅游', code: '000978', chg: 10.03, turn: 33.72, note: '涨停 · 机构净买2018万 · 近半年上榜后5日平均+13.66%' },
+    { name: '泰金新能', code: '688813', chg: 12.48, turn: 33.50, note: '机构净买2.02亿（当日机构净买第一）' },
+    { name: '澳洋健康', code: '002172', chg: 10.09, turn: 31.51, note: '10天4板 · 龙虎榜净买9649万' },
+    { name: '北自科技', code: '603082', chg: -2.60, turn: 31.23, note: '高换手下跌 · 净卖出1296万' },
+    { name: '瑞尔特', code: '002790', chg: -9.99, turn: 30.63, note: '天地板 · 净卖出7350万' },
+    { name: '高斯贝尔', code: '002848', chg: -3.35, turn: 30.49, note: '高换手下跌' },
+    { name: '马矿股份', code: '601123', chg: 10.03, turn: 29.97, note: '涨停 · 营业部净买7136万' },
+    { name: '嘉立创', code: '001232', chg: 8.33, turn: 27.08, note: '3日累计净买4.36亿' },
+    { name: '中京电子', code: '002579', chg: 10.01, turn: 25.49, note: '涨停 · PCB · 净买2.81亿' },
+    { name: '黄河旋风', code: '600172', chg: 9.98, turn: 23.74, note: '涨停 · 培育钻石 · 净买5.85亿' }
+  ],
+  lianban: [
+    { boards: '4连板', name: '闽东电力', theme: '绿色电力 · 海上风电' },
+    { boards: '12天7板', name: '国芳集团', theme: '商贸零售 · 人气高标' },
+    { boards: '6天5板', name: '桂林旅游', theme: '旅游 · 机构接力' },
+    { boards: '5天4板', name: '众泰汽车', theme: '智能网联汽车规划催化' },
+    { boards: '6天4板', name: '超声电子', theme: 'PCB · 覆铜板放量' },
+    { boards: '10天4板', name: '澳洋健康', theme: '医药 · CRO修复' },
+    { boards: '3连板', name: '中新赛克', theme: '网络安全 · 一字板' },
+    { boards: '3连板', name: '凯盛新能', theme: '光伏玻璃 · 建材' }
+  ],
+  bigCaps: [
+    { name: '中际旭创', code: '300308', chg: -5.72, amp: 3.06, amount: 239.4, note: '光模块 · 主力净流出近30亿居首' },
+    { name: '新易盛', code: '300502', chg: -4.99, amp: 3.29, amount: 130.4, note: '光模块' },
+    { name: '长鑫科技', code: '688825', chg: -3.95, amp: 1.92, amount: 105.0, note: '存储' },
+    { name: '寒武纪', code: '688256', chg: 0.00, amp: 4.82, amount: 85.5, note: 'AI芯片 · 收平' },
+    { name: '东山精密', code: '002384', chg: -4.79, amp: 4.02, amount: 105.0, note: 'PCB 大票 · 高位回调' },
+    { name: '宁德时代', code: '300750', chg: 2.00, amp: 2.36, amount: 88.7, note: '电池 · 主力净流入6.47亿' }
+  ]
+};
+
+function fmtPct(v) { return (v > 0 ? '+' : '') + v.toFixed(2) + '%'; }
+function chgColor(v) { return v > 0 ? UP : (v < 0 ? DOWN : '#6b7280'); }
+
+function initCharts() {
+  // 指数涨跌幅
+  var c1 = echarts.init(document.getElementById('chartIdx'));
+  c1.setOption({
+    tooltip: { trigger: 'axis', formatter: function(p) {
+      var d = p[0];
+      return d.name + '<br>涨跌幅：' + fmtPct(d.value) + '<br>当日振幅：' + DATA.indices[d.dataIndex].amp.toFixed(2) + '%';
+    }},
+    grid: { left: 50, right: 20, top: 30, bottom: 30 },
+    xAxis: { type: 'category', data: DATA.indices.map(function(i){ return i.name; }),
+      axisLabel: { fontSize: 11, color: '#6b7280' } },
+    yAxis: { type: 'value', axisLabel: { formatter: '{value}%', fontSize: 11, color: '#9ca3af' },
+      splitLine: { lineStyle: { color: '#eef1f5' } } },
+    series: [{ type: 'bar', barWidth: '52%',
+      label: { show: true, position: 'top', fontSize: 11,
+        formatter: function(p) { return fmtPct(p.value); },
+        color: '#6b7280' },
+      data: DATA.indices.map(function(i) {
+        return { value: i.chg, itemStyle: { color: chgColor(i.chg), borderRadius: 4 } };
+      })
+    }]
+  });
+
+  // 板块涨跌
+  var sec = DATA.sectors.slice().sort(function(a, b) { return b.v - a.v; });
+  var c2 = echarts.init(document.getElementById('chartSector'));
+  c2.setOption({
+    tooltip: { trigger: 'axis', formatter: function(p) { return p[0].name + '：' + fmtPct(p[0].value); } },
+    grid: { left: 100, right: 40, top: 10, bottom: 24 },
+    xAxis: { type: 'value', axisLabel: { formatter: '{value}%', fontSize: 11, color: '#9ca3af' },
+      splitLine: { lineStyle: { color: '#eef1f5' } } },
+    yAxis: { type: 'category', data: sec.map(function(s) { return s.name; }).reverse(),
+      axisLabel: { fontSize: 11.5, color: '#374151' } },
+    series: [{ type: 'bar', barWidth: '60%',
+      label: { show: true, position: 'right', fontSize: 11, formatter: function(p) { return fmtPct(p.value); }, color: '#6b7280' },
+      data: sec.slice().reverse().map(function(s) {
+        return { value: s.v, itemStyle: { color: chgColor(s.v), borderRadius: 3 } };
+      })
+    }]
+  });
+
+  // 振幅榜（横向条形）
+  var amp = DATA.ampTop.slice().sort(function(a, b) { return a.amp - b.amp; });
+  var c3 = echarts.init(document.getElementById('chartAmp'));
+  c3.setOption({
+    tooltip: { trigger: 'item', formatter: function(p) {
+      var d = amp[p.dataIndex];
+      return d.name + '（' + d.code + '）<br>振幅：' + d.amp.toFixed(2) + '%<br>涨跌幅：' + fmtPct(d.chg) +
+        '<br>换手率：' + d.turn.toFixed(2) + '% · 量比：' + d.vr.toFixed(2) + '<br>总市值：' + d.mcap + '亿';
+    }},
+    grid: { left: 90, right: 56, top: 10, bottom: 24 },
+    xAxis: { type: 'value', axisLabel: { formatter: '{value}%', fontSize: 11, color: '#9ca3af' },
+      splitLine: { lineStyle: { color: '#eef1f5' } } },
+    yAxis: { type: 'category', data: amp.map(function(d) { return d.name; }),
+      axisLabel: { fontSize: 11.5, color: '#374151' } },
+    series: [{ type: 'bar', barWidth: '58%',
+      label: { show: true, position: 'right', fontSize: 11, color: '#6b7280',
+        formatter: function(p) { return amp[p.dataIndex].amp.toFixed(1) + '%'; } },
+      data: amp.map(function(d) {
+        return { value: d.amp, itemStyle: { color: chgColor(d.chg), borderRadius: 3, opacity: 0.88 } };
+      })
+    }]
+  });
+
+  // 散点：换手 × 涨跌幅
+  var sc = DATA.scatter;
+  var c4 = echarts.init(document.getElementById('chartScatter'));
+  c4.setOption({
+    tooltip: { trigger: 'item', formatter: function(p) {
+      var d = sc[p.dataIndex];
+      return d.name + '<br>换手率：' + d.turn.toFixed(2) + '%<br>涨跌幅：' + fmtPct(d.chg) + '<br>振幅：' + d.amp.toFixed(2) + '%';
+    }},
+    grid: { left: 50, right: 30, top: 20, bottom: 40 },
+    xAxis: { type: 'value', name: '换手率 %', nameTextStyle: { fontSize: 11, color: '#9ca3af' },
+      axisLabel: { fontSize: 11, color: '#9ca3af' }, splitLine: { lineStyle: { color: '#eef1f5' } } },
+    yAxis: { type: 'value', name: '涨跌幅 %', nameTextStyle: { fontSize: 11, color: '#9ca3af' },
+      axisLabel: { fontSize: 11, color: '#9ca3af', formatter: '{value}%' },
+      splitLine: { lineStyle: { color: '#eef1f5' } } },
+    series: [{ type: 'scatter',
+      data: sc.map(function(d) {
+        return { value: [d.turn, d.chg], name: d.name,
+          symbolSize: 10 + d.amp * 0.9,
+          itemStyle: { color: chgColor(d.chg), opacity: 0.75 } };
+      }),
+      label: { show: true, position: 'top', fontSize: 10.5, color: '#6b7280',
+        formatter: function(p) { return p.data.name; } },
+      labelLayout: { hideOverlap: true }
+    }]
+  });
+
+  // 龙虎榜
+  var lhb = DATA.lhb.slice().sort(function(a, b) { return a.v - b.v; });
+  var c5 = echarts.init(document.getElementById('chartLhb'));
+  c5.setOption({
+    tooltip: { trigger: 'item', formatter: function(p) {
+      return lhb[p.dataIndex].name + '：' + (lhb[p.dataIndex].v > 0 ? '+' : '') + lhb[p.dataIndex].v.toFixed(2) + ' 亿元';
+    }},
+    grid: { left: 100, right: 46, top: 10, bottom: 24 },
+    xAxis: { type: 'value', axisLabel: { fontSize: 11, color: '#9ca3af', formatter: '{value}亿' },
+      splitLine: { lineStyle: { color: '#eef1f5' } } },
+    yAxis: { type: 'category', data: lhb.map(function(d) { return d.name; }),
+      axisLabel: { fontSize: 11.5, color: '#374151' } },
+    series: [{ type: 'bar', barWidth: '58%',
+      label: { show: true, fontSize: 11, color: '#6b7280',
+        position: function(p) { return p.value >= 0 ? 'right' : 'left'; },
+        formatter: function(p) { return (p.value > 0 ? '+' : '') + p.value.toFixed(2); } },
+      data: lhb.map(function(d) {
+        return { value: d.v, itemStyle: { color: chgColor(d.v), borderRadius: 3, opacity: 0.88 } };
+      })
+    }]
+  });
+
+  window.addEventListener('resize', function() {
+    [c1, c2, c3, c4, c5].forEach(function(c) { c.resize(); });
+  });
+}
+
+function renderTables() {
+  // 振幅表
+  var rows = DATA.ampTop.map(function(d) {
+    return '<tr><td style="font-weight:600">' + d.name + '<span class="code">' + d.code + '</span></td>' +
+      '<td>' + d.price.toFixed(2) + '</td>' +
+      '<td><span class="tag ' + (d.chg >= 0 ? 'up' : 'down') + '">' + fmtPct(d.chg) + '</span></td>' +
+      '<td style="font-weight:700">' + d.amp.toFixed(2) + '%</td>' +
+      '<td>' + d.turn.toFixed(2) + '%</td>' +
+      '<td>' + d.vr.toFixed(2) + '</td>' +
+      '<td>' + d.mcap + ' 亿</td></tr>';
+  }).join('');
+  document.getElementById('ampTable').innerHTML =
+    '<thead><tr><th>股票</th><th>收盘价(元)</th><th>涨跌幅</th><th>振幅</th><th>换手率</th><th>量比</th><th>总市值</th></tr></thead><tbody>' + rows + '</tbody>';
+
+  // 换手表
+  var maxTurn = 38.71;
+  var rows2 = DATA.turnTop.map(function(d) {
+    var w = Math.round(d.turn / maxTurn * 100);
+    return '<tr><td style="font-weight:600">' + d.name + '<span class="code">' + d.code + '</span></td>' +
+      '<td><span class="tag ' + (d.chg >= 0 ? 'up' : 'down') + '">' + fmtPct(d.chg) + '</span></td>' +
+      '<td style="font-weight:700">' + d.turn.toFixed(2) + '% <span class="bar-mini" style="width:' + w + 'px"></span></td>' +
+      '<td style="color:var(--text-2);white-space:normal;font-size:12.5px">' + d.note + '</td></tr>';
+  }).join('');
+  document.getElementById('turnTable').innerHTML =
+    '<thead><tr><th>股票</th><th>涨跌幅</th><th>换手率</th><th>龙虎榜/资金备注</th></tr></thead><tbody>' + rows2 + '</tbody>';
+
+  // 连板
+  document.getElementById('lianbanGrid').innerHTML = DATA.lianban.map(function(d) {
+    return '<div class="lb-card"><div class="boards">' + d.boards + '</div>' +
+      '<div class="nm">' + d.name + '</div><div class="th">' + d.theme + '</div></div>';
+  }).join('');
+
+  // 大市值对照
+  var rows3 = DATA.bigCaps.map(function(d) {
+    return '<tr><td style="font-weight:600">' + d.name + '<span class="code">' + d.code + '</span></td>' +
+      '<td><span class="tag ' + (d.chg >= 0 ? 'up' : 'down') + '">' + fmtPct(d.chg) + '</span></td>' +
+      '<td>' + d.amp.toFixed(2) + '%</td>' +
+      '<td>' + d.amount.toFixed(1) + ' 亿</td>' +
+      '<td style="color:var(--text-2);white-space:normal;font-size:12.5px">' + d.note + '</td></tr>';
+  }).join('');
+  document.getElementById('bigTable').innerHTML =
+    '<thead><tr><th>股票</th><th>涨跌幅</th><th>振幅</th><th>成交额</th><th>备注</th></tr></thead><tbody>' + rows3 + '</tbody>';
+}
+
+// 振幅榜 图/表切换
+document.getElementById('ampSeg').addEventListener('click', function(e) {
+  if (e.target.tagName !== 'BUTTON') return;
+  var btns = this.querySelectorAll('button');
+  btns.forEach(function(b) { b.classList.remove('on'); });
+  e.target.classList.add('on');
+  var isChart = e.target.dataset.v === 'chart';
+  document.getElementById('ampChartBox').style.display = isChart ? '' : 'none';
+  document.getElementById('ampTableBox').style.display = isChart ? 'none' : '';
+  if (isChart && window.echarts) {
+    var el = document.getElementById('chartAmp');
+    var inst = echarts.getInstanceByDom(el);
+    if (inst) { inst.resize(); }
+  }
+});
+
+renderTables();
+if (window.echarts) {
+  initCharts();
+} else {
+  var boxes = ['chartIdx','chartSector','chartAmp','chartScatter','chartLhb'];
+  boxes.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) { el.innerHTML = '<div style="padding:40px;color:#9ca3af;font-size:13px;text-align:center">图表组件（ECharts CDN）加载失败，请联网后刷新，或查看下方表格数据。</div>'; }
+  });
+}
+</script>
+</body>
+</html>
