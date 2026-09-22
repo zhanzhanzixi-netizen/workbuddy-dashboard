@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股高弹性标的每日复盘 · 2026-09-22</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  :root {
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --border: #e8ecf1;
+    --text: #1f2937;
+    --text-2: #6b7280;
+    --text-3: #9ca3af;
+    --primary: #3b6ef6;
+    --radius: 14px;
+    --up: #ef4444;
+    --down: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px 48px; }
+  .top {
+    background: linear-gradient(135deg, #3b6ef6 0%, #7c5cff 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .top h1 { font-size: 22px; font-weight: 700; }
+  .top p { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px rgba(16,24,40,0.06);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+  .badge-up { background: #fee2e2; color: #dc2626; }
+  .badge-down { background: #dcfce7; color: #16a34a; }
+  .badge-neutral { background: #f3f4f6; color: #6b7280; }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .kpi-item {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .kpi-label { font-size: 12px; color: var(--text-2); margin-bottom: 4px; }
+  .kpi-value { font-size: 20px; font-weight: 700; }
+  .kpi-sub { font-size: 12px; margin-top: 2px; }
+  .up { color: var(--up); }
+  .down { color: var(--down); }
+  .neutral { color: var(--text-2); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th, td { padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--border); }
+  th { font-weight: 600; color: var(--text-2); background: #f8fafc; }
+  td { font-variant-numeric: tabular-nums; }
+  td:first-child, th:first-child { text-align: left; padding-left: 12px; }
+  tr:hover td { background: #f8fafc; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: #eef2ff;
+    color: #4f46e5;
+    margin-left: 4px;
+  }
+  .tag-st { background: #fef3c7; color: #d97706; }
+  .chart-box { width: 100%; height: 280px; margin-top: 10px; }
+  ul.concl { list-style: none; }
+  ul.concl li {
+    padding: 10px 12px 10px 34px;
+    position: relative;
+    border-bottom: 1px dashed var(--border);
+  }
+  ul.concl li:last-child { border-bottom: none; }
+  ul.concl li::before {
+    content: attr(data-n);
+    position: absolute;
+    left: 6px;
+    top: 12px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .framework-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .fw-item {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .fw-item h3 { font-size: 13px; margin-bottom: 6px; color: var(--primary); }
+  .fw-item p { font-size: 12px; color: var(--text-2); }
+  .ladder-note { font-size: 12px; color: var(--text-2); margin-top: 10px; }
+  .footer { text-align: center; font-size: 12px; color: var(--text-3); margin-top: 24px; }
+  .src { font-size: 12px; color: var(--text-3); margin-top: 12px; }
+  .risk { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 10px; padding: 12px 16px; font-size: 13px; margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <h1>A股高弹性标的每日复盘 · 2026-09-22</h1>
+    <p>周二 | 上证 3952.13（+0.06%）| 两市成交 2.14 万亿 | 涨停 64 家 · 封板率约 79% | 数据截至 2026-09-22 15:00 收盘</p>
+  </div>
+
+  <div class="card">
+    <h2>📌 结论速览</h2>
+    <ul class="concl">
+      <li data-n="1"><b>指数分化、冲高回落：</b>上证 +0.06% 收 3952.13 点（盘中冲高 3967.68 后回落），深成指 -0.05%、创业板指 +0.01%（盘中一度涨超 2% 尾盘回吐），科创50 +0.46% 最强、北证50 -1.08%；两市成交 2.14 万亿（沪 10080 亿 + 深 11276 亿），较昨日放量约 1040 亿，但全市场超 3000 只下跌（约 2374 涨 / 3030 跌），典型「指数稳、个股亏钱效应」的分化行情。</li>
+      <li data-n="2"><b>情绪明显退潮：</b>涨停 64 家（昨日 103 家，近乎腰斩），炸板 17 家、封板率约 79%，跌停 3 家（盛景微、菲林格尔、荣丰控股）。最高标<b class="up">华瓷股份 6 板</b>晋级（一字封单 2.59 亿），但次高标内蒙新华 5 板炸板 3 次、封单仅 0.05 亿弱封——高度在，赚钱难度升。</li>
+      <li data-n="3"><b>AI 应用/算力芯片接棒主线：</b>Meta AI 智能体 Muse 爆火（连续三日居美区 App 下载榜首）+ 隔夜美股 Meta +11%、AMD +10% 市值破万亿美元，市场重估 CPU/端侧算力需求：南威软件 2 板、智度股份/新炬网络/中新赛克/中国长城/综艺股份/禾盛新材涨停，旋极信息 20cm 回封（量比 11.24 全场最高）、瑞芯微/博通集成（端侧 AI 芯片 3 板）涨停；资金自 CPO 高位股（中际旭创 223 亿成交 -1.41%、胜宏科技 -2.38%）切换至 CPU/存储（兆易创新 206 亿成交 +2.65%、澜起科技 +5.58%、海光信息 +3.88%）。</li>
+      <li data-n="4"><b>医药/CRO 分歧中仍强：</b>南华生物 4 板、义翘神州 20cm 涨停（盘中炸板 5 次回封）、康希诺涨停、华仁药业 20cm 2 连板，百花医药/新华制药/哈药股份 2 连板；催化：药企出海 BD 带动投融资修复 + AI 制药正循环率先利好上游蛋白合成、临床前 CRO（财通证券）。出版传媒（「新华系」：内蒙新华 5 板、新华文轩 3 板、中国出版、华媒控股、新华传媒涨停）与地产（华远控股/我爱我家/华丽家族 2 板）为支线。</li>
+      <li data-n="5"><b>高弹性端：新股情绪极致 + 高位巨震：</b>两只上市新股多次临停——<b class="up">N中塑（创业板）首日 +683.29%</b>（换手 90.03%、成交 23.4 亿）、<b class="up">N世纪（北交所）+742.37%</b>；C沈鼓上市第三日振幅 20.41%、换手 54.2% 企稳。风险样本：<b class="down">华纺股份断板 -7.97%</b>（振幅 18.51%、换手 38.1%）、腾信精密 -11.11%（北交所）、万邦医药平盘但换手 56.6% 高位巨震。</li>
+      <li data-n="6"><b>宏观与日程：</b>中秋休市 9/25–9/27，节前仅剩 2 个交易日，警惕节前仓位调整；今日国新办「十四五」金融成就发布会，明日（9/23）高通骁龙峰会开幕；昨夜星舰第 14 次试飞。弱势方向：港口航运（招商南油、国航远洋跌超 5%）、旅游酒店（长白山 -5.46%）、贵金属（山东黄金 -2.42%）。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>📊 指数 KPI</h2>
+    <div class="kpi-grid">
+      <div class="kpi-item">
+        <div class="kpi-label">上证指数</div>
+        <div class="kpi-value up">3952.13</div>
+        <div class="kpi-sub up">+0.06%（+2.22）</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-label">深证成指</div>
+        <div class="kpi-value down">13723.74</div>
+        <div class="kpi-sub down">-0.05%（-6.29）</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-label">创业板指</div>
+        <div class="kpi-value up">3399.93</div>
+        <div class="kpi-sub up">+0.01%（+0.34）</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-label">沪深300</div>
+        <div class="kpi-value up">4544.59</div>
+        <div class="kpi-sub up">+0.11%（+5.02）</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-label">科创50</div>
+        <div class="kpi-value up">1665.04</div>
+        <div class="kpi-sub up">+0.46%（+7.56）</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-label">两市成交额</div>
+        <div class="kpi-value">2.14 万亿</div>
+        <div class="kpi-sub neutral">较昨日放量约 1040 亿</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-label">涨跌家数</div>
+        <div class="kpi-value"><span class="up">约 2374 涨</span> / <span class="down">3030 跌</span></div>
+        <div class="kpi-sub neutral">全市场超 3000 只下跌</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-label">涨停 / 炸板 / 跌停</div>
+        <div class="kpi-value up">64 / 17 / 3</div>
+        <div class="kpi-sub neutral">封板率约 79%（东财涨停池口径）</div>
+      </div>
+    </div>
+    <div class="chart-box" id="chartIndex"></div>
+    <div class="chart-box" id="chartSentiment"></div>
+  </div>
+
+  <div class="card">
+    <h2>🪜 连板梯队<span class="badge badge-up">最高 6 板</span></h2>
+    <table>
+      <thead>
+        <tr><th>梯队</th><th>股票</th><th>代码</th><th>涨幅</th><th>题材/驱动</th><th>备注</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><b>6 板</b></td><td>华瓷股份</td><td>001216</td><td class="up">+10.02%</td><td>MLCC / 氧化锆 / 陶瓷出口</td><td>一字板，封单约 2.59 亿，市场最高标</td></tr>
+        <tr><td><b>5 板</b></td><td>内蒙新华</td><td>603230</td><td class="up">+9.98%</td><td>出版发行 / 国企改革</td><td>盘中炸板 3 次，尾盘封单仅 0.05 亿，弱封</td></tr>
+        <tr><td><b>4 板</b></td><td>南华生物</td><td>000504</td><td class="up">+9.99%</td><td>干细胞 / 医药 + AI 制药</td><td>一字板，封单约 2.73 亿</td></tr>
+        <tr><td rowspan="4"><b>3 板</b></td><td>新华文轩</td><td>601811</td><td class="up">+10.01%</td><td>出版传媒 / 「新华系」</td><td>一字板，封单约 0.08 亿</td></tr>
+        <tr><td>三羊马</td><td>001317</td><td class="up">+10.01%</td><td>物流 / 汽车运输</td><td>炸板 2 次，封单约 0.5 亿</td></tr>
+        <tr><td>博通集成</td><td>603068</td><td class="up">+10.00%</td><td>端侧 AI 芯片 / 无线连接</td><td>炸板 1 次，尾盘回封</td></tr>
+        <tr><td>大亚圣象</td><td>000910</td><td class="up">+10.06%</td><td>家居 / 地产链</td><td>午后 13:12 上板，封单约 0.18 亿</td></tr>
+        <tr><td><b>2 板 ×17</b></td><td colspan="5" style="text-align:left;padding-left:12px;">华仁药业（20cm）、百花医药、新华制药、哈药股份（医药）；华媒控股、新华传媒（传媒）；华远控股、我爱我家、华丽家族（地产）；南威软件（AI 应用）；奥佳华、泰慕士、美盈森、爱普股份、延华智能、艾艾精工、升达林业</td></tr>
+      </tbody>
+    </table>
+    <div class="ladder-note">
+      连板股共 24 只（东财涨停池口径：6 板 1 只、5 板 1 只、4 板 1 只、3 板 4 只、2 板 17 只），1 板 40 只。
+      「新华系」出版传媒集体晋级为今日梯队主特征。昨日断板：锡华科技（-1.53%）、世联行、龙头股份（炸板后 +3.95%）。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>⚡ 当日高弹性标的<span class="badge badge-up">振幅 / 换手 / 量比优选</span></h2>
+    <table>
+      <thead>
+        <tr><th>名称</th><th>代码</th><th>涨幅</th><th>振幅</th><th>换手率</th><th>量比</th><th>成交额</th><th>入选理由</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>N中塑</td><td>301686</td><td class="up"><b>+683.29%</b></td><td><b>592.13%</b></td><td><b>90.03%</b></td><td>—</td><td>23.4 亿</td><td>创业板新股上市首日暴涨，多次临停</td></tr>
+        <tr><td>华仁药业</td><td>300110</td><td class="up">+20.06%</td><td>16.72%</td><td>29.47%</td><td><b>6.57</b></td><td>12.9 亿</td><td>CRO/医药 20cm 涨停 2 连板，量比 6.6</td></tr>
+        <tr><td>旋极信息</td><td>300324</td><td class="up">+20.00%</td><td>18.26%</td><td>16.91%</td><td><b>11.24</b></td><td>11.6 亿</td><td>算力芯片 20cm 回封，量比全场最高</td></tr>
+        <tr><td>视涯科技-UW</td><td>688781</td><td class="up">+20.00%</td><td>18.39%</td><td>28.10%</td><td>4.60</td><td>5.8 亿</td><td>OLED 微显示次新，20cm 涨停</td></tr>
+        <tr><td>义翘神州</td><td>301047</td><td class="up">+16.09%</td><td><b>23.70%</b></td><td>15.42%</td><td>2.12</td><td>24.5 亿</td><td>CRO/生命科学试剂，炸板 5 次回封</td></tr>
+        <tr><td>诺唯赞</td><td>688105</td><td class="up">+15.50%</td><td>22.36%</td><td>7.35%</td><td>3.39</td><td>9.9 亿</td><td>IVD/蛋白试剂，AI 制药上游</td></tr>
+        <tr><td>光云科技</td><td>688365</td><td class="up">+13.92%</td><td>15.08%</td><td>12.88%</td><td>6.26</td><td>9.2 亿</td><td>AI 应用/电商 SaaS，炸板 2 次</td></tr>
+        <tr><td>百花医药</td><td>600721</td><td class="up">+10.04%</td><td>8.37%</td><td><b>50.63%</b></td><td>1.97</td><td>27.4 亿</td><td>CRO 2 连板，高换手接力</td></tr>
+        <tr><td>C沈鼓</td><td>601091</td><td class="up">+0.69%</td><td>20.41%</td><td><b>54.20%</b></td><td>0.67</td><td><b>43.8 亿</b></td><td>上市第三日巨震企稳，换手过半</td></tr>
+        <tr><td>万邦医药</td><td>301520</td><td class="neutral">0.00%</td><td>12.21%</td><td><b>56.63%</b></td><td>1.10</td><td>15.4 亿</td><td>CXO 平盘，高位巨量换手分歧</td></tr>
+        <tr><td>华纺股份</td><td>600448</td><td class="down"><b>-7.97%</b></td><td><b>18.51%</b></td><td>38.07%</td><td>2.98</td><td>9.1 亿</td><td>昨日 3 板今日断板大面，纯风险样本</td></tr>
+      </tbody>
+    </table>
+    <div class="risk">
+      ⚠️ 风险提示：N中塑/N世纪上市首日 +683%/+742% 属极端情绪样本，追高风险极大；C沈鼓三天累计波动率极端（上市首日 +177.74% → 次日 -34.71% → 今日 ±20% 振幅）；内蒙新华 5 板炸板 3 次、义翘神州炸板 5 次，弱封板次日溢价预期打折；北交所腾信精密 -11.11% 显示高位次新回吐风险。节前仅剩 2 个交易日，注意仓位与流动性安排。
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📈 主线涨停分布（ECharts）</h2>
+    <div class="chart-box" id="chartTheme"></div>
+    <div class="src">口径：按题材归类的涨停家数近似统计（东财涨停池 64 只，不含新股，含一字/换手板），来源：东方财富涨停池 + 腾讯新闻/格隆汇/央广网收评交叉核对。</div>
+  </div>
+
+  <div class="card">
+    <h2>🧭 弹性指标框架</h2>
+    <div class="framework-grid">
+      <div class="fw-item">
+        <h3>β（贝塔系数）</h3>
+        <p>衡量个股相对大盘的弹性。今日入选标的多为高 β 品种：AI 算力/医药题材股 β 显著大于 1；N中塑类上市首日属极端 β 样本，不适合常规 β 框架度量。</p>
+      </div>
+      <div class="fw-item">
+        <h3>振幅（Amplitude）</h3>
+        <p>（最高-最低）/昨收。今日阈值参考：非次新振幅 ≥15% 即入池（义翘神州 23.70%、诺唯赞 22.36%、旋极信息 18.26%）；N中塑 592% 为新股发行价口径极端值。</p>
+      </div>
+      <div class="fw-item">
+        <h3>换手率（Turnover）</h3>
+        <p>≥25% 视为高换手活跃。今日：N中塑 90.03%、万邦医药 56.63%、C沈鼓 54.20%、百花医药 50.63%、N世纪 98.98%——高位高换手需甄别接力与出货。</p>
+      </div>
+      <div class="fw-item">
+        <h3>量比（Volume Ratio）</h3>
+        <p>≥3 视为显著放量。今日：旋极信息 11.24、华仁药业 6.57、光云科技 6.26、视涯科技 4.60，均为短线资金集中进攻信号。</p>
+      </div>
+      <div class="fw-item">
+        <h3>连板高度与梯队</h3>
+        <p>最高标 6 板（华瓷股份），梯队 6-5-4-3-2 完整但 2 板多达 17 只、1 板 40 只——底部扩散、中位拥挤；5 板内蒙新华弱封（炸 3 次、封单 0.05 亿），高度晋级质量存疑。</p>
+      </div>
+      <div class="fw-item">
+        <h3>封板质量</h3>
+        <p>封单/成交比（封成比）与开板次数：华瓷股份一字封 2.59 亿、南华生物封 2.73 亿质量最佳；内蒙新华炸 3 次、义翘神州炸 5 次、瑞芯微炸 22 次属弱封板，次日溢价预期打折。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>⚠️ 免责声明 & 数据来源</h2>
+    <p style="font-size:13px;color:var(--text-2);">
+      本页面为个人投资研究复盘记录，所有内容仅作信息整理与分析参考，不构成任何投资建议或操作指导。文中提及的个股仅作产业逻辑与市场情绪分析之用，不代表买卖推荐。市场有风险，投资需谨慎；过往表现不代表未来收益，任何投资决策应基于个人风险承受能力并咨询持牌专业机构。
+    </p>
+    <div class="src">
+      数据来源：东方财富行情接口、涨停/跌停/炸板池（截至 2026-09-22 收盘）、腾讯证券行情接口（双源核对一致）、腾讯新闻/新浪财经/格隆汇/央广网收评（主线与涨跌家数交叉核对）。指数点位与个股指标（涨幅/振幅/换手率/量比/成交额）为交易所收盘数据；两市成交额 2.1356 万亿为沪深口径，含北交所全市场约 2.154 万亿。生成时间：2026-09-22 15:30。
+    </div>
+  </div>
+
+  <div class="footer">A股高弹性标的每日复盘 · 自动化生成 · 2026-09-22 · 上一期：<a href="20260921.html">2026-09-21</a> · <a href="index.html">归档索引</a></div>
+</div>
+
+<script>
+// 中国市场惯例：涨=红，跌=绿
+var UP = '#ef4444', DOWN = '#22c55e', GRID = '#e8ecf1', TXT = '#6b7280';
+
+var chartIndex = echarts.init(document.getElementById('chartIndex'));
+chartIndex.setOption({
+  title: { text: '主要指数涨跌幅（%）', left: 'center', textStyle: { fontSize: 14, color: '#1f2937' } },
+  grid: { left: 50, right: 30, top: 50, bottom: 40 },
+  tooltip: { trigger: 'axis' },
+  xAxis: { type: 'category', data: ['上证指数','深证成指','创业板指','沪深300','科创50','北证50'], axisLabel: { color: TXT }, axisLine: { lineStyle: { color: GRID } } },
+  yAxis: { type: 'value', axisLabel: { color: TXT }, splitLine: { lineStyle: { color: GRID } } },
+  series: [{
+    type: 'bar', barWidth: '45%',
+    data: [
+      { value: 0.06, itemStyle: { color: UP } },
+      { value: -0.05, itemStyle: { color: DOWN } },
+      { value: 0.01, itemStyle: { color: UP } },
+      { value: 0.11, itemStyle: { color: UP } },
+      { value: 0.46, itemStyle: { color: UP } },
+      { value: -1.08, itemStyle: { color: DOWN } }
+    ],
+    label: { show: true, position: 'top', color: '#1f2937', formatter: function(p){ return (p.value>0?'+':'')+p.value+'%'; } }
+  }]
+});
+
+var chartSentiment = echarts.init(document.getElementById('chartSentiment'));
+chartSentiment.setOption({
+  title: { text: '近 6 个交易日：涨停家数（柱） vs 两市成交额（线，万亿）', left: 'center', textStyle: { fontSize: 14, color: '#1f2937' } },
+  grid: { left: 55, right: 60, top: 50, bottom: 40 },
+  tooltip: { trigger: 'axis' },
+  legend: { data: ['涨停家数','两市成交额'], top: 24, textStyle: { color: TXT } },
+  xAxis: { type: 'category', data: ['09-15','09-16','09-17','09-18','09-21','09-22'], axisLabel: { color: TXT }, axisLine: { lineStyle: { color: GRID } } },
+  yAxis: [
+    { type: 'value', name: '家', axisLabel: { color: TXT }, splitLine: { lineStyle: { color: GRID } } },
+    { type: 'value', name: '万亿', min: 1.5, axisLabel: { color: TXT }, splitLine: { show: false } }
+  ],
+  series: [
+    {
+      name: '涨停家数', type: 'bar', barWidth: '40%',
+      data: [67, 91, 49, 79, 103, 64],
+      itemStyle: { color: UP },
+      label: { show: true, position: 'top', color: UP }
+    },
+    {
+      name: '两市成交额', type: 'line', yAxisIndex: 1,
+      data: [2.28, 1.84, 1.82, 2.08, 2.03, 2.14],
+      lineStyle: { color: '#3b6ef6', width: 2 },
+      itemStyle: { color: '#3b6ef6' },
+      label: { show: true, position: 'bottom', color: '#3b6ef6', formatter: '{c}' }
+    }
+  ]
+});
+
+var chartTheme = echarts.init(document.getElementById('chartTheme'));
+chartTheme.setOption({
+  title: { text: '今日涨停家数按主线分布（家，近似归类）', left: 'center', textStyle: { fontSize: 14, color: '#1f2937' } },
+  grid: { left: 130, right: 50, top: 40, bottom: 30 },
+  tooltip: { trigger: 'axis' },
+  xAxis: { type: 'value', axisLabel: { color: TXT }, splitLine: { lineStyle: { color: GRID } } },
+  yAxis: {
+    type: 'category',
+    data: ['地产家居','其他/周期','机械/高端制造','化工/材料','消费/纺织','半导体/端侧芯片','医药/CRO','传媒出版','电子元件/PCB','AI应用/软件'],
+    axisLabel: { color: TXT }
+  },
+  series: [{
+    type: 'bar', barWidth: '55%',
+    data: [5, 6, 5, 5, 6, 5, 8, 8, 7, 9],
+    itemStyle: { color: '#3b6ef6' },
+    label: { show: true, position: 'right', color: '#1f2937' }
+  }]
+});
+
+window.addEventListener('resize', function () {
+  chartIndex.resize(); chartSentiment.resize(); chartTheme.resize();
+});
+</script>
+</body>
+</html>
