@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股高弹性标的每日复盘 · 2026-09-29</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  :root {
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --border: #e8ecf1;
+    --text: #1f2937;
+    --text-2: #6b7280;
+    --text-3: #9ca3af;
+    --primary: #3b6ef6;
+    --radius: 14px;
+    --up: #ef4444;
+    --down: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px 48px; }
+  .top {
+    background: linear-gradient(135deg, #3b6ef6 0%, #7c5cff 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .top h1 { font-size: 22px; font-weight: 700; }
+  .top p { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px rgba(16,24,40,0.06);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+  .badge-up { background: #fee2e2; color: #dc2626; }
+  .badge-down { background: #dcfce7; color: #16a34a; }
+  .badge-neutral { background: #f3f4f6; color: #6b7280; }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .kpi-item {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .kpi-label { font-size: 12px; color: var(--text-2); margin-bottom: 4px; }
+  .kpi-value { font-size: 20px; font-weight: 700; }
+  .kpi-sub { font-size: 12px; margin-top: 2px; }
+  .up { color: var(--up); }
+  .down { color: var(--down); }
+  .neutral { color: var(--text-2); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th, td { padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--border); }
+  th { font-weight: 600; color: var(--text-2); background: #f8fafc; }
+  td { font-variant-numeric: tabular-nums; }
+  td:first-child, th:first-child { text-align: left; padding-left: 12px; }
+  tr:hover td { background: #f8fafc; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: #eef2ff;
+    color: #4f46e5;
+    margin-left: 4px;
+  }
+  .chart-box { width: 100%; height: 280px; margin-top: 10px; }
+  .summary li { margin: 8px 0; padding-left: 4px; }
+  .summary b { color: var(--text); }
+  .foot { font-size: 12px; color: var(--text-3); margin-top: 18px; }
+  .ladder { display: flex; flex-direction: column; gap: 8px; }
+  .ladder-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+  .ladder-tier {
+    flex: 0 0 84px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: #3b6ef6;
+    border-radius: 6px;
+    text-align: center;
+    padding: 3px 0;
+  }
+  .ladder-tier.t3 { background: #7c5cff; }
+  .ladder-tier.t2 { background: #9333ea; }
+  .ladder-tier.t1 { background: #64748b; }
+  .frame-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+  .frame-item { background: #f8fafc; border-radius: 10px; padding: 14px 16px; }
+  .frame-item h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .frame-item p { font-size: 12.5px; color: var(--text-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <h1>A股高弹性标的每日复盘 · 2026-09-29</h1>
+    <p>周二 · 国庆节前第 2 个交易日 · 数据来源：东方财富 / 腾讯行情接口 + 当日公开收评交叉核对（央广财经 / 中新经纬 / 南方+ / 每经） · 生成时间 2026-09-29 15:30</p>
+  </div>
+
+  <div class="card">
+    <h2>📌 结论速览 <span class="badge badge-up">缩量修复</span></h2>
+    <ul class="summary">
+      <li><b>缩量企稳，普涨修复：</b>昨日大跌后三大指数集体收红，上证 <b class="up">+0.18%</b> 报 3830.45、深成指 <b class="up">+0.34%</b>、创业板指 <b class="up">+0.09%</b>、科创50 <b class="up">+0.86%</b> 相对最强；但两市成交 <b>1.41 万亿（14092 亿）创年内新低</b>，较昨日缩量约 2936 亿——典型节前存量博弈。</li>
+      <li><b>情绪显著回暖：</b>涨停 <b class="up">57</b> 家 vs 跌停 <b class="down">11</b> 家（昨日 32 vs 56），炸板仅 8 家、封板率约 88%；全市场 3471 涨 / 1933 跌（南方+口径），昨日"冰点"未延续，跌停潮戛然而止。</li>
+      <li><b>连板梯队修复、高度抬升：</b><b>新华传媒 6 连板</b>（出版 / AI 语料）成为市场唯一高度；<b>澳弘电子 12 天 8 板</b>（PCB 人气龙头）强势回封，新华文轩 7 天 6 板，雪龙集团 4 连板。</li>
+      <li><b>三主线共振：</b>① PCB/元件大反弹（板块涨超 4%：迅捷兴 20cm、超声电子、奥士康、依顿电子、澳弘电子涨停）；② 固态电池爆发（武汉蓝电 30cm、尚水智能 20cm、国轩高科/上海洗霸/金龙羽涨停）；③ 房地产批量涨停（万科A、滨江集团、信达地产、华联控股，深物业A 2 连板）；AI 应用 / AI 语料（纵横通信、掌阅科技、引力传媒）持续活跃。</li>
+      <li><b>退潮方向：</b>次新与前期人气股天量换手普跌——洛轴股份换手 54.65% 收 <b class="down">-7.30%</b>（昨日 +14.46%）、C中塑 <b class="down">-17.10%</b>、沈鼓集团 / 电科思仪 -9%；昨日爆拉的黄酒龙头会稽山直接跌停，玻璃基板（沃格光电 -9.39%）、种植业（万向德农跌停）、PTA、航运领跌。</li>
+      <li><b>节前提示：</b>明日（9/30）为节前最后一个交易日，量能年内新低 + 长假 10 天（10/1-10/7 休市 + 中秋尾段）期间外围不确定性未消化，"持币过节"惯性或使尾段再度承压；短线反弹以低吸错杀板块为主，不追天量换手的次新高位股。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>📊 指数 KPI</h2>
+    <div class="kpi-grid">
+      <div class="kpi-item"><div class="kpi-label">上证指数</div><div class="kpi-value up">+0.18%</div><div class="kpi-sub neutral">3830.45</div></div>
+      <div class="kpi-item"><div class="kpi-label">深证成指</div><div class="kpi-value up">+0.34%</div><div class="kpi-sub neutral">12901.95</div></div>
+      <div class="kpi-item"><div class="kpi-label">创业板指</div><div class="kpi-value up">+0.09%</div><div class="kpi-sub neutral">3142.56</div></div>
+      <div class="kpi-item"><div class="kpi-label">沪深300</div><div class="kpi-value up">+0.10%</div><div class="kpi-sub neutral">4345.21</div></div>
+      <div class="kpi-item"><div class="kpi-label">科创50</div><div class="kpi-value up">+0.86%</div><div class="kpi-sub neutral">1569.34</div></div>
+      <div class="kpi-item"><div class="kpi-label">北证50</div><div class="kpi-value up">+0.56%</div><div class="kpi-sub neutral">收评口径</div></div>
+      <div class="kpi-item"><div class="kpi-label">两市成交额</div><div class="kpi-value neutral">1.41 万亿</div><div class="kpi-sub down">年内新低 · 缩量约 2936 亿</div></div>
+      <div class="kpi-item"><div class="kpi-label">涨跌家数</div><div class="kpi-value"><span class="up">3471</span> / <span class="down">1933</span></div><div class="kpi-sub neutral">平盘 155</div></div>
+    </div>
+    <div id="chartIndex" class="chart-box"></div>
+  </div>
+
+  <div class="card">
+    <h2>🔥 涨停 / 炸板 / 跌停统计 <span class="badge badge-up">情绪回暖</span></h2>
+    <div class="kpi-grid">
+      <div class="kpi-item"><div class="kpi-label">涨停</div><div class="kpi-value up">57</div><div class="kpi-sub neutral">前值（9/28）32</div></div>
+      <div class="kpi-item"><div class="kpi-label">炸板</div><div class="kpi-value neutral">8</div><div class="kpi-sub neutral">封板率约 88%</div></div>
+      <div class="kpi-item"><div class="kpi-label">跌停</div><div class="kpi-value down">11</div><div class="kpi-sub up">前值（9/28）56</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--text-2);margin-top:12px;">涨停结构围绕三条线：固态电池（武汉蓝电、尚水智能、上海洗霸、国轩高科、金龙羽、时代万恒）、PCB/元件（澳弘电子、依顿电子、奥士康、超声电子、迅捷兴、协和电子、金禄电子）、房地产链（万科A、滨江集团、信达地产、华联控股、深物业A、特发服务）；AI 应用（纵横通信、掌阅科技、引力传媒、环球印务）与电力（浙江新能 2 连板、宁波能源）为辅线。跌停集中在前期人气股与题材退潮方向：百合花、万向德农、国芳集团、会稽山（昨日 +41.84% 后今日跌停）、高争民爆、金辰股份、泰慕士、金健米业、通达创智、华茂股份等。</p>
+  </div>
+
+  <div class="card">
+    <h2>🪜 连板梯队</h2>
+    <div class="ladder">
+      <div class="ladder-row"><span class="ladder-tier">6 板</span><span><b>新华传媒</b>（出版 / AI 语料）——市场唯一高度、空间标</span></div>
+      <div class="ladder-row"><span class="ladder-tier">高位股</span><span><b>澳弘电子 12 天 8 板</b>（PCB，今日回封涨停）、<b>新华文轩 7 天 6 板</b>（出版）——前期龙头修复</span></div>
+      <div class="ladder-row"><span class="ladder-tier t3">4 板</span><span><b>雪龙集团</b>（汽车零部件）；另有 <b>南威软件 6 天 4 板</b>（AI 应用 / 信创）</span></div>
+      <div class="ladder-row"><span class="ladder-tier t2">3 板</span><span><b>襄阳轴承</b>（汽车零部件）、<b>中新赛克 5 天 3 板</b>（网络可视化 / 快手概念）</span></div>
+      <div class="ladder-row"><span class="ladder-tier t1">2 板</span><span><b>深物业A</b>（地产/物业）、<b>浙江新能</b>（电力）、<b>时代万恒</b>（电池）、<b>津药药业</b>（化学制药）、<b>九阳股份</b>（小家电）、<b>善水科技</b>（化学原料 20cm）；3 天 2 板：泉阳泉、国统股份；4 天 2 板：依顿电子（PCB）</span></div>
+    </div>
+    <p style="font-size:13px;color:var(--text-2);margin-top:12px;">对比昨日（新华传媒 5 板独苗、梯队断层），今日梯队明显修复：2 板以上 10 余只，且澳弘电子、新华文轩两大前期龙头同时回封，高位人气股止跌是情绪回暖的核心信号。汽车零部件（雪龙、襄阳轴承）形成小集群。</p>
+  </div>
+
+  <div class="card">
+    <h2>⚡ 高弹性 / 高波动活跃标的</h2>
+    <table>
+      <thead><tr><th>名称 / 代码</th><th>涨跌幅</th><th>振幅</th><th>换手率</th><th>量比</th><th>成交额</th><th>看点</th></tr></thead>
+      <tbody>
+        <tr><td>迅捷兴 <span class="tag">688655</span></td><td class="up">+20.01%</td><td>22.23%</td><td>10.19%</td><td>1.02</td><td>9.5 亿</td><td>20cm 涨停（PCB），板块反弹先锋、全场涨幅第一</td></tr>
+        <tr><td>近岸蛋白 <span class="tag">688137</span></td><td class="up">+10.36%</td><td>26.24%</td><td>15.41%</td><td>1.13</td><td>14.7 亿</td><td>振幅全场最高（生物医药原料），宽幅震荡博弈</td></tr>
+        <tr><td>华是科技 <span class="tag">301218</span></td><td class="up">+13.18%</td><td>20.62%</td><td>31.20%</td><td>1.79</td><td>12.6 亿</td><td>振幅换手双高（智慧水利/AI），今日最强进攻弹性</td></tr>
+        <tr><td>金禄电子 <span class="tag">301282</span></td><td class="up">+13.64%</td><td>16.41%</td><td>11.44%</td><td>1.39</td><td>8.9 亿</td><td>PCB 二线补涨，弹性跟随主线</td></tr>
+        <tr><td>特发服务 <span class="tag">300917</span></td><td class="up">+13.49%</td><td>14.18%</td><td>17.90%</td><td>1.56</td><td>10.5 亿</td><td>20cm 弹性（物业/地产链），联动深物业A 2 连板</td></tr>
+        <tr><td>澳弘电子 <span class="tag">605058</span></td><td class="up">+10.00%</td><td>15.85%</td><td>15.40%</td><td>1.09</td><td>12.4 亿</td><td>12 天 8 板人气龙头回封，PCB 情绪风向标</td></tr>
+        <tr><td>国轩高科 <span class="tag">002074</span></td><td class="up">+10.01%</td><td>5.68%</td><td>2.66%</td><td>1.39</td><td>13.0 亿</td><td>涨停（固态电池），低振幅一字型进攻、板块中军</td></tr>
+        <tr><td>大金重工 <span class="tag">002487</span></td><td class="up">+3.75%</td><td>14.11%</td><td>15.11%</td><td>1.36</td><td>40.6 亿</td><td>风电出海逻辑，今日成交额居前的高波动权重</td></tr>
+        <tr><td>洛轴股份 <span class="tag">301699</span></td><td class="down">-7.30%</td><td>12.68%</td><td>54.65%</td><td>1.32</td><td>15.0 亿</td><td>昨日 +14.46% 今日回落，换手王派发信号</td></tr>
+        <tr><td>C中塑 <span class="tag">301686</span></td><td class="down">-17.10%</td><td>16.55%</td><td>53.05%</td><td>0.79</td><td>9.6 亿</td><td>上市初期高位重挫，次新博弈风险释放中</td></tr>
+        <tr><td>电科思仪 <span class="tag">301689</span></td><td class="down">-8.92%</td><td>8.18%</td><td>40.32%</td><td>0.76</td><td>18.4 亿</td><td>连续天量换手下跌，高位筹码持续松动</td></tr>
+        <tr><td>沈鼓集团 <span class="tag">601091</span></td><td class="down">-9.09%</td><td>7.69%</td><td>39.71%</td><td>0.75</td><td>21.8 亿</td><td>次新龙头退潮，缩幅但仍放量下杀</td></tr>
+        <tr><td>会稽山 <span class="tag">601579</span></td><td class="down">-9.98%</td><td>—</td><td>—</td><td>—</td><td>—</td><td>昨日 +41.84% 爆拉、今日直接跌停，情绪股一日游典型</td></tr>
+        <tr><td>沃格光电 <span class="tag">603773</span></td><td class="down">-9.39%</td><td>6.89%</td><td>15.13%</td><td>0.89</td><td>31.3 亿</td><td>玻璃基板领跌，放量下杀（成交 31.3 亿）</td></tr>
+      </tbody>
+    </table>
+    <div id="chartElastic" class="chart-box" style="height:320px;"></div>
+    <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">注：数据取自东方财富行情接口全市场扫描（按成交额降序活跃样本，成交额 &gt;1 亿筛选）；会稽山跌停未进入振幅样本（一字/准一字），仅列涨跌幅。今日弹性结构清晰：进攻端集中在 PCB / 固态电池 / 地产链 20cm 标的，退潮端集中在次新与前期人气股——"天量换手 + 下跌"组合（洛轴、电科思仪、沈鼓）连续第二日出现，派发信号强化。</p>
+  </div>
+
+  <div class="card">
+    <h2>🧭 弹性指标框架 · 今日读数</h2>
+    <div class="frame-grid">
+      <div class="frame-item">
+        <h3>β（贝塔）· 方向暴露</h3>
+        <p>昨日重挫的高 β 板块（PCB/元件、电池）率先反弹且幅度居前，低 β 防御（农业、油气、煤炭、航运）反而垫底——资金从防御切回进攻，是风险偏好修复的标准读数；但指数级 β 弹性有限（三大指数仅 +0.1~0.3%），属结构性修复而非趋势反转。</p>
+      </div>
+      <div class="frame-item">
+        <h3>振幅（Amplitude）· 分歧度</h3>
+        <p>成交额 &gt;1 亿样本中振幅 ≥14% 约 15 只，近岸蛋白 26.24% 全场最高但收 +10.36%，长下影博弈激烈；华是科技（20.62%）/迅捷兴（22.23%）为"高振幅 + 高涨幅"进攻组合。昨日"上影线警示"名单中的奥佳华今日 -4.35%，回避逻辑兑现。</p>
+      </div>
+      <div class="frame-item">
+        <h3>换手率（Turnover）· 筹码交换</h3>
+        <p>换手 ≥30% 共 11 只（洛轴 54.65%、C中塑 53.05%、万邦医药 40.87%、电科思仪 40.32%、沈鼓 39.71% 等），其中 8 只收跌——次新与前期人气股"天量换手 + 下跌"连续第二日，筹码派发未结束；"天量换手 + 上涨"仅华是科技、我爱我家等少数，幸存模式稀缺。</p>
+      </div>
+      <div class="frame-item">
+        <h3>量比（Volume Ratio）· 增量观察</h3>
+        <p>量比榜：丽珠集团 5.81（放量 +6.23%）、五方光电 4.32、大业股份 4.01、先导智能 3.78（固态电池设备）。但两市总量 1.41 万亿创年内新低——增量资金缺席，反弹由存量资金高低切换驱动，对高度（新华传媒 6 板）的持续性与节前最后一天的承接力不宜高估。</p>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-2);margin-top:12px;"><b>节前策略提示：</b>明日（9/30）为节前最后交易日，亦是节前取现/逆回购最后窗口，尾盘抛压可能放大。仓位策略上：反弹主线（PCB、固态电池、地产）若明日继续放量可持有部分过节，天量换手高位次新不碰；节后观察名单保留被错杀算力硬件（光模块、PCB 上游）与"十五五"政策催化方向（电力、新型电池、AI 应用）。历史统计（中信建投）：国庆节后一周上证上涨概率 62.5%，节前缩量整理不改变节后弹性窗口。</p>
+  </div>
+
+  <div class="card">
+    <h2>📚 数据来源与口径</h2>
+    <p style="font-size:12.5px;color:var(--text-2);">
+      指数行情与高弹性指标（涨跌幅/振幅/换手率/量比/成交额）：东方财富行情接口全市场扫描（沪深京 A 股，成交额降序活跃样本）+ 腾讯行情接口（qt.gtimg.cn）指数成交额（沪 6617 亿 + 深 7475 亿 = 14092 亿，与央广财经收评 1.41 万亿一致）。涨停/炸板/跌停池（收盘口径）：东方财富涨停池 57 家、炸板池 8 家、跌停池 10 家；涨停 57 / 跌停 11 采用每经·网易收评口径（是否含 ST 存在口径差异）。涨跌家数 3471/1933/155 采用南方+收评口径（中新经纬一致）。连板梯队：东财涨停池连板数字段 + 网易/每经涨停复盘交叉核对。资讯交叉核对：央广财经《9月29日A股收评》、中新经纬、南方+、每日经济新闻（2026-09-29）。所有数据为公开信息整理，仅供复盘研究参考，不构成投资建议。
+    </p>
+    <p class="foot">⚠️ 免责声明：本页面由自动化流程生成，数据可能存在延迟或口径差异。股市有风险，投资需谨慎。本内容不构成任何投资建议。</p>
+  </div>
+
+</div>
+
+<script>
+var UP = '#ef4444', DOWN = '#22c55e';
+var chartIndex = echarts.init(document.getElementById('chartIndex'));
+chartIndex.setOption({
+  grid: { left: 50, right: 30, top: 40, bottom: 40 },
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+  xAxis: { type: 'category', data: ['上证指数','深证成指','创业板指','沪深300','科创50','北证50'],
+    axisLabel: { interval: 0, fontSize: 12 } },
+  yAxis: { type: 'value', axisLabel: { formatter: '{value}%' } },
+  series: [{
+    type: 'bar', barWidth: '45%',
+    data: [
+      { value: 0.18, itemStyle: { color: UP } },
+      { value: 0.34, itemStyle: { color: UP } },
+      { value: 0.09, itemStyle: { color: UP } },
+      { value: 0.10, itemStyle: { color: UP } },
+      { value: 0.86, itemStyle: { color: UP } },
+      { value: 0.56, itemStyle: { color: UP } }
+    ],
+    label: { show: true, position: 'top', formatter: '{c}%', color: '#dc2626', fontWeight: 600 }
+  }]
+});
+
+var elastic = [
+  { n: '迅捷兴', x: 10.19, y: 22.23, v: 20.01, a: 9.5 },
+  { n: '近岸蛋白', x: 15.41, y: 26.24, v: 10.36, a: 14.7 },
+  { n: '华是科技', x: 31.20, y: 20.62, v: 13.18, a: 12.6 },
+  { n: '金禄电子', x: 11.44, y: 16.41, v: 13.64, a: 8.9 },
+  { n: '特发服务', x: 17.90, y: 14.18, v: 13.49, a: 10.5 },
+  { n: '澳弘电子', x: 15.40, y: 15.85, v: 10.00, a: 12.4 },
+  { n: '国轩高科', x: 2.66, y: 5.68, v: 10.01, a: 13.0 },
+  { n: '大金重工', x: 15.11, y: 14.11, v: 3.75, a: 40.6 },
+  { n: '洛轴股份', x: 54.65, y: 12.68, v: -7.30, a: 15.0 },
+  { n: 'C中塑', x: 53.05, y: 16.55, v: -17.10, a: 9.6 },
+  { n: '电科思仪', x: 40.32, y: 8.18, v: -8.92, a: 18.4 },
+  { n: '沈鼓集团', x: 39.71, y: 7.69, v: -9.09, a: 21.8 },
+  { n: '沃格光电', x: 15.13, y: 6.89, v: -9.39, a: 31.3 }
+];
+var chartElastic = echarts.init(document.getElementById('chartElastic'));
+chartElastic.setOption({
+  grid: { left: 60, right: 40, top: 45, bottom: 55 },
+  tooltip: {
+    formatter: function(p) {
+      var d = p.data;
+      return d[3] + '<br>换手率 ' + d[0] + '% · 振幅 ' + d[1] + '%<br>涨跌幅 ' + d[2] + '% · 成交 ' + d[4] + ' 亿';
+    }
+  },
+  xAxis: { type: 'value', name: '换手率 %', nameLocation: 'middle', nameGap: 30, nameTextStyle: { fontSize: 12 } },
+  yAxis: { type: 'value', name: '振幅 %', nameTextStyle: { fontSize: 12 } },
+  series: [{
+    type: 'scatter',
+    symbolSize: function(d) { return Math.max(10, Math.min(38, d[4] * 1.3)); },
+    data: elastic.map(function(s) {
+      return { value: [s.x, s.y, s.v, s.n, s.a],
+        itemStyle: { color: s.v >= 0 ? 'rgba(239,68,68,0.75)' : 'rgba(34,197,94,0.75)',
+                     borderColor: s.v >= 0 ? '#dc2626' : '#16a34a', borderWidth: 1 } };
+    }),
+    label: { show: true, position: 'top', fontSize: 10.5, color: '#6b7280',
+      formatter: function(p) { return p.data.value[3]; } }
+  }]
+});
+window.addEventListener('resize', function() { chartIndex.resize(); chartElastic.resize(); });
+</script>
+</body>
+</html>
