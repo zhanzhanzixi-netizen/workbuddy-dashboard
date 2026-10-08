@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股高弹性标的每日复盘 · 2026-10-08</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  :root {
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --border: #e8ecf1;
+    --text: #1f2937;
+    --text-2: #6b7280;
+    --text-3: #9ca3af;
+    --primary: #3b6ef6;
+    --radius: 14px;
+    --up: #ef4444;
+    --down: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px 48px; }
+  .top {
+    background: linear-gradient(135deg, #3b6ef6 0%, #7c5cff 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .top h1 { font-size: 22px; font-weight: 700; }
+  .top p { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px rgba(16,24,40,0.06);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+  .badge-up { background: #fee2e2; color: #dc2626; }
+  .badge-down { background: #dcfce7; color: #16a34a; }
+  .badge-neutral { background: #f3f4f6; color: #6b7280; }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .kpi-item {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .kpi-label { font-size: 12px; color: var(--text-2); margin-bottom: 4px; }
+  .kpi-value { font-size: 20px; font-weight: 700; }
+  .kpi-sub { font-size: 12px; margin-top: 2px; }
+  .up { color: var(--up); }
+  .down { color: var(--down); }
+  .neutral { color: var(--text-2); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th, td { padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--border); }
+  th { font-weight: 600; color: var(--text-2); background: #f8fafc; }
+  td { font-variant-numeric: tabular-nums; }
+  td:first-child, th:first-child { text-align: left; padding-left: 12px; }
+  tr:hover td { background: #f8fafc; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: #eef2ff;
+    color: #4f46e5;
+    margin-left: 4px;
+  }
+  .chart-box { width: 100%; height: 280px; margin-top: 10px; }
+  .summary li { margin: 8px 0; padding-left: 4px; }
+  .summary b { color: var(--text); }
+  .foot { font-size: 12px; color: var(--text-3); margin-top: 18px; }
+  .ladder { display: flex; flex-direction: column; gap: 8px; }
+  .ladder-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+  .ladder-tier {
+    flex: 0 0 84px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: #3b6ef6;
+    border-radius: 6px;
+    text-align: center;
+    padding: 3px 0;
+  }
+  .ladder-tier.t3 { background: #7c5cff; }
+  .ladder-tier.t2 { background: #9333ea; }
+  .ladder-tier.t1 { background: #64748b; }
+  .frame-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+  .frame-item { background: #f8fafc; border-radius: 10px; padding: 14px 16px; }
+  .frame-item h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .frame-item p { font-size: 12.5px; color: var(--text-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <h1>A股高弹性标的每日复盘 · 2026-10-08</h1>
+    <p>周四 · 国庆假期后首个交易日（10/1–10/7 休市） · 数据来源：东方财富 / 腾讯行情接口 + 当日公开收评交叉核对（央广网 / 格隆汇 / 同花顺 / 每日经济新闻 / 中国金融信息网） · 生成时间 2026-10-08 15:30</p>
+  </div>
+
+  <div class="card">
+    <h2>📌 结论速览 <span class="badge badge-down">节后放量回调</span></h2>
+    <ul class="summary">
+      <li><b>节后首日放量下跌，双创领跌：</b>沪指 <b class="down">-0.79%</b> 报 3811.90、深成指 <b class="down">-2.07%</b>、创业板指 <b class="down">-3.15%</b>、<b>科创50 大跌 4.82%</b>、北证50 <b class="down">-2.65%</b>。两市成交 <b>1.69 万亿（16943 亿）</b>，较节前最后一日（9/30 的 1.45 万亿）放量约 <b>2442 亿</b>（+16.86%），但增量资金悉数被套——全市场 <b class="up">1698 涨</b> / <b class="down">3748 跌</b>，赚钱效应仅 31.18%，呈典型的"放量杀跌"格局。</li>
+      <li><b>CPO/半导体成杀跌重灾区：</b>美参院 S.5548 法案阴影未散 + 摩根士丹利报告提及 FCC"受控清单"潜在限制，CPO 三剑客集体崩塌——长光华芯 <b class="down">-20.07%</b>、源杰科技 <b class="down">-20.01%</b> 20cm 跌停，东山精密跌停，沃格光电跌停；思瑞浦、微导纳米、圣邦股份等半导体产业链大幅下挫，科创50 领跌全市场。AI 硬件上游进入业绩验证前的"预期杀"阶段。</li>
+      <li><b>固态电池逆势爆发成最强主线：</b>七部门联合发布《新型电池产业发展"十五五"规划》直接点火——力王股份 <b class="up">+29.96%</b>（30cm 涨停，北交所）、传艺科技 3 连板、紫竹高科 3 连板、时代万恒 4 连板、领湃科技 20cm、贝特利 20cm、雄韬股份/丰元股份/野马电池/龙蟠科技批量涨停。板块涨停占比超全市场两成，政策催化密度极高。</li>
+      <li><b>航运+能源共振，银行创历史新高：</b>布油突破 102 美元/桶——中远海能、招商南油涨停，科力股份涨超 9%，通源石油涨超 7%；银行板块盘中震荡走强，<b>中国银行、工商银行、杭州银行股价日内创出历史新高</b>，红利防御属性在成长股杀跌时获得资金避险加持。</li>
+      <li><b>连板梯队高度维持但中位承压：</b>新华传媒晋级 <b>8 连板</b>（出版/AI 语料），封单资金 6862 万元，市场唯一空间标；但昨日 7 板后中位股断层明显——3 连板仅 4 只、2 连板仅 3 只，且前期人气股华瓷股份、雪龙集团、新华文轩集体跌停，高位退潮风险释放。</li>
+      <li><b>新股 N力勤 引爆流动性：</b>上市首日暴涨 <b class="up">+206.59%</b>，换手 74.93%、成交 83.5 亿跻身全市场前十，镍资源+磷酸铁锂双概念；但次新派发组继续承压——洛轴股份高换手震荡、电科思仪/沈鼓集团延续跌势，市场对新故事（电池政策）与旧故事（次新）的取舍泾渭分明。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>📊 指数 KPI</h2>
+    <div class="kpi-grid">
+      <div class="kpi-item"><div class="kpi-label">上证指数</div><div class="kpi-value down">-0.79%</div><div class="kpi-sub neutral">3811.90</div></div>
+      <div class="kpi-item"><div class="kpi-label">深证成指</div><div class="kpi-value down">-2.07%</div><div class="kpi-sub neutral">12620.90</div></div>
+      <div class="kpi-item"><div class="kpi-label">创业板指</div><div class="kpi-value down">-3.15%</div><div class="kpi-sub neutral">3036.66</div></div>
+      <div class="kpi-item"><div class="kpi-label">沪深300</div><div class="kpi-value down">-1.09%</div><div class="kpi-sub neutral">4310.28</div></div>
+      <div class="kpi-item"><div class="kpi-label">科创50</div><div class="kpi-value down">-4.82%</div><div class="kpi-sub neutral">1456.32</div></div>
+      <div class="kpi-item"><div class="kpi-label">北证50</div><div class="kpi-value down">-2.65%</div><div class="kpi-sub neutral">1012.10</div></div>
+      <div class="kpi-item"><div class="kpi-label">两市成交额</div><div class="kpi-value neutral">1.69 万亿</div><div class="kpi-sub neutral">放量约 2442 亿</div></div>
+      <div class="kpi-item"><div class="kpi-label">涨跌家数</div><div class="kpi-value"><span class="up">1698</span> / <span class="down">3748</span></div><div class="kpi-sub neutral">赚钱效应 31.18%</div></div>
+    </div>
+    <div id="chartIndex" class="chart-box"></div>
+  </div>
+
+  <div class="card">
+    <h2>🔥 涨停 / 炸板 / 跌停统计 <span class="badge badge-down">情绪承压</span></h2>
+    <div class="kpi-grid">
+      <div class="kpi-item"><div class="kpi-label">涨停</div><div class="kpi-value up">45</div><div class="kpi-sub neutral">前值（9/30）52</div></div>
+      <div class="kpi-item"><div class="kpi-label">跌停</div><div class="kpi-value down">15</div><div class="kpi-sub neutral">前值（9/30）8</div></div>
+      <div class="kpi-item"><div class="kpi-label">涨停结构</div><div class="kpi-value neutral">43+1+1</div><div class="kpi-sub neutral">主板43 / 创业板3 / 科创1 / 北交1</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--text-2);margin-top:12px;">涨停高度集中在电池产业链（力王股份30cm、领湃科技20cm、传艺科技3板、紫竹高科3板、时代万恒4板、雄韬股份/丰元股份/野马电池/龙蟠科技等10cm）与航运（中远海能、招商南油）、PCB（世名科技20cm、卓越新能20cm）、地产（陆家嘴2板）方向。跌停重灾区为CPO/半导体（长光华芯-20%、源杰科技-20%、东山精密跌停、沃格光电跌停）及前期人气股（华瓷股份、雪龙集团、新华文轩、江淮汽车跌停）。节前强势的医药主线今日分化——康希诺、泰诺麦博等未能连板，资金快速切向电池政策新催化。</p>
+  </div>
+
+  <div class="card">
+    <h2>🪜 连板梯队</h2>
+    <div class="ladder">
+      <div class="ladder-row"><span class="ladder-tier">8 连板</span><span><b>新华传媒</b>（600825，出版 / AI 语料）——市场唯一空间标，封单资金 6862 万元（昨日 7 板晋级）</span></div>
+      <div class="ladder-row"><span class="ladder-tier t3">4 连板</span><span><b>九阳股份</b>（002242，小家电，封单资金 2.4 亿居首）、<b>时代万恒</b>（600241，电池）</span></div>
+      <div class="ladder-row"><span class="ladder-tier t2">3 连板</span><span><b>紫竹高科</b>（002058，电池）、<b>传艺科技</b>（002866，消费电子 / 固态电池）、<b>园林股份</b>（605303，基础建设）、<b>上海洗霸</b>（603200，环境治理 / 固态电池）</span></div>
+      <div class="ladder-row"><span class="ladder-tier t1">2 连板</span><span><b>陆家嘴</b>（600663，房地产开发）、<b>兴业股份</b>（603928，塑料）、<b>龙蟠科技</b>（603906，电池）</span></div>
+    </div>
+    <p style="font-size:13px;color:var(--text-2);margin-top:12px;">梯队高度维持 8 板（新华传媒），但<b>中位严重断层</b>：4 连板仅 2 只、3 连板 4 只、2 连板 3 只，有效连板股合计仅 10 只（不含首板），为近两周最低。更关键的是昨日高位股大面积跌停——华瓷股份（前 6 板）、雪龙集团（前 4 板）、新华文轩（前 7 天 6 板）集体跌停，江淮汽车跌停，说明节前抱团资金在节后首日选择"断臂"离场。新华传媒 8 板属独苗抱团，对板块带动有限，明日若断板需警惕情绪二次下杀。</p>
+  </div>
+
+  <div class="card">
+    <h2>⚡ 高弹性 / 高波动活跃标的</h2>
+    <table>
+      <thead><tr><th>名称 / 代码</th><th>涨跌幅</th><th>振幅</th><th>换手率</th><th>量比</th><th>成交额</th><th>看点</th></tr></thead>
+      <tbody>
+        <tr><td>N力勤 <span class="tag">001246</span></td><td class="up">+206.59%</td><td>93.50%</td><td>74.93%</td><td>—</td><td>83.5 亿</td><td>新股上市首日，镍资源+磷酸铁锂，成交跻身全市场前十</td></tr>
+        <tr><td>力王股份 <span class="tag">920627</span></td><td class="up">+29.96%</td><td>31.34%</td><td>25.69%</td><td>—</td><td>16.8 亿</td><td>30cm 涨停（北交所），固态电池政策直接受益</td></tr>
+        <tr><td>世名科技 <span class="tag">300522</span></td><td class="up">+20.00%</td><td>16.45%</td><td>9.90%</td><td>—</td><td>5.3 亿</td><td>20cm 涨停（PCB/化学制品），覆铜板涨价传导</td></tr>
+        <tr><td>卓越新能 <span class="tag">688196</span></td><td class="up">+20.00%</td><td>19.97%</td><td>5.03%</td><td>—</td><td>4.6 亿</td><td>20cm 涨停（化学制品/生物柴油）</td></tr>
+        <tr><td>贝特利 <span class="tag">301697</span></td><td class="up">+19.99%</td><td>17.90%</td><td>46.23%</td><td>—</td><td>8.3 亿</td><td>20cm 涨停（光伏设备/电池材料），高换手进攻</td></tr>
+        <tr><td>尚水智能 <span class="tag">301513</span></td><td class="up">+19.98%</td><td>24.77%</td><td>48.24%</td><td>—</td><td>6.8 亿</td><td>20cm 涨停，振幅换手双高，锂电设备</td></tr>
+        <tr><td>领湃科技 <span class="tag">300530</span></td><td class="up">+19.98%</td><td>21.57%</td><td>10.31%</td><td>—</td><td>4.1 亿</td><td>20cm 涨停（电池），政策催化核心标的</td></tr>
+        <tr><td>金银河 <span class="tag">300619</span></td><td class="up">+17.57%</td><td>19.53%</td><td>13.31%</td><td>—</td><td>6.4 亿</td><td>锂电设备高弹性，接近 20cm</td></tr>
+        <tr><td>武汉蓝电 <span class="tag">920779</span></td><td class="up">+15.84%</td><td>29.13%</td><td>40.86%</td><td>—</td><td>2.7 亿</td><td>北交所电池标的，高振幅高换手</td></tr>
+        <tr><td>中远海能 <span class="tag">600026</span></td><td class="up">+10.02%</td><td>4.47%</td><td>1.01%</td><td>—</td><td>12.4 亿</td><td>开盘 1 分钟涨停，航运龙头，封单 57 万手</td></tr>
+        <tr><td>九阳股份 <span class="tag">002242</span></td><td class="up">+10.00%</td><td>0.00%</td><td>1.44%</td><td>—</td><td>10.5 亿</td><td>4 连板，封单资金 2.4 亿居全市场首位</td></tr>
+        <tr><td>长光华芯 <span class="tag">688048</span></td><td class="down">-20.07%</td><td>20.07%</td><td>—</td><td>—</td><td>15.2 亿</td><td>20cm 跌停（CPO/光芯片），AI 硬件上游领跌核心</td></tr>
+        <tr><td>源杰科技 <span class="tag">688498</span></td><td class="down">-20.01%</td><td>20.01%</td><td>—</td><td>—</td><td>12.8 亿</td><td>20cm 跌停（CPO/光芯片），与长光华芯联动杀跌</td></tr>
+        <tr><td>东山精密 <span class="tag">002384</span></td><td class="down">-10.09%</td><td>10.09%</td><td>—</td><td>—</td><td>28.6 亿</td><td>跌停（元件/CPO），大市值权重杀跌压制情绪</td></tr>
+        <tr><td>艾力斯 <span class="tag">688578</span></td><td class="down">-20.02%</td><td>20.02%</td><td>—</td><td>—</td><td>8.4 亿</td><td>20cm 跌停（化学制药），医药高位股补跌</td></tr>
+      </tbody>
+    </table>
+    <div id="chartElastic" class="chart-box" style="height:320px;"></div>
+    <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">注：数据取自东方财富行情接口全市场扫描（按成交额降序活跃样本，成交额 &gt;1 亿筛选）+ 腾讯行情接口交叉核对。今日弹性结构呈现极端分化：进攻端几乎被电池产业链（力王股份、贝特利、尚水智能、领湃科技、金银河、武汉蓝电）与 PCB（世名科技、卓越新能）垄断；退潮端则是 CPO 三剑客（长光华芯、源杰科技、东山精密）与医药高位股（艾力斯）的集中释放。</p>
+  </div>
+
+  <div class="card">
+    <h2>🧭 弹性指标框架 · 今日读数</h2>
+    <div class="frame-grid">
+      <div class="frame-item">
+        <h3>β（贝塔）· 方向暴露</h3>
+        <p>高 β 内部完成剧烈换仓：节前高 β 主线医药/CXO 今日分化（艾力斯 20cm 跌停 vs 电池新贵 20cm 涨停），科技高 β 遭全面抛售（科创50 -4.82% 领跌全市场）。低 β 防御（银行创历史新高、油气/煤炭/电力逆势上涨）获得避险资金加持——这不是全面熊市，而是高 β 内部的"去旧迎新"，电池政策替代医药成为新的高 β 锚点。</p>
+      </div>
+      <div class="frame-item">
+        <h3>振幅（Amplitude）· 分歧度</h3>
+        <p>成交额 &gt;1 亿样本中振幅 ≥16% 约 15 只：N力勤 93.5%（新股）、武汉蓝电 29.13%、力王股份 31.34%、尚水智能 24.77%、领湃科技 21.57%、金银河 19.53%、卓越新能 19.97%、贝特利 17.90%、世名科技 16.45%——电池/PCB 贡献了全部高振幅进攻位；退潮端长光华芯/源杰科技/艾力斯均以 20% 振幅封死跌停，多空分歧在各自主线内极致释放。</p>
+      </div>
+      <div class="frame-item">
+        <h3>换手率（Turnover）· 筹码交换</h3>
+        <p>换手 ≥30% 共 12 只以上：N力勤 74.93%、尚水智能 48.24%、贝特利 46.23%、武汉蓝电 40.86%、洛轴股份/电科思仪/沈鼓集团等次新派发组仍在高位换手。值得注意的信号是：电池新贵（尚水智能、贝特利、武汉蓝电）呈现"天量换手 + 20cm/大涨"的健康换手结构，而次新派发组（洛轴、电科思仪）则是"天量换手 + 不涨/下跌"的派现结构——同样的高换手，方向截然不同。</p>
+      </div>
+      <div class="frame-item">
+        <h3>量比（Volume Ratio）· 增量观察</h3>
+        <p>两市总量 1.69 万亿较节前放量 2442 亿（+16.86%），但增量全部体现在"杀跌放量"而非"进攻放量"——创业板指 -3.15% 伴随放量、科创50 -4.82% 伴随放量，说明节后资金回流后选择先兑现节前持仓（尤其是 CPO/半导体/医药高位股），而非追买新主线。电池板块虽涨停潮，但多数标的成交额并未异常放大，属存量资金切换而非增量进场。明日需观察量能能否维持在 1.6 万亿以上且指数止跌，否则电池主线按"一日游脉冲"应对。</p>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-2);margin-top:12px;"><b>明日策略提示：</b>节后首日呈现"放量下杀 + 主线切换"格局，情绪实际处于退潮期（跌停 15 只创近两周新高）。持仓应对优先级：① 电池政策主线（力王股份、传艺科技、紫竹高科、时代万恒）观察是否有二板/三板延续，若明日竞价大面积低开则按脉冲处理；② CPO/半导体错杀修复（长光华芯、源杰科技、东山精密）明日若继续低开可博弈技术性反弹，但仓位需轻；③ 银行/油气/航运等红利防御（中远海能、中国银行）在指数不稳时仍有避险价值；④ 坚决回避高位退潮股（华瓷股份、雪龙集团、新华文轩、江淮汽车）与次新派发组（洛轴股份、电科思仪）。</p>
+  </div>
+
+  <div class="card">
+    <h2>📚 数据来源与口径</h2>
+    <p style="font-size:12.5px;color:var(--text-2);">
+      指数行情与高弹性指标（涨跌幅/振幅/换手率/量比/成交额）：东方财富行情接口全市场扫描（沪深京 A 股，成交额降序活跃样本）+ 腾讯行情接口（qt.gtimg.cn）交叉核对。涨停/炸板/跌停池（收盘口径）：每日经济新闻 45 涨停 / 15 跌停、新浪财经同口径交叉验证；涨停结构分布参考东方财富涨停池。涨跌家数 1698/3748 采用同花顺全 A 口径（赚钱效应 31.18%）。两市成交额 1.69 万亿（沪市 8112 亿 + 深市 8709 亿 + 北证 124 亿）与格隆汇/同花顺收评一致。连板梯队：东方财富涨停池连板数字段 + 格隆汇/金融界涨停复盘交叉核对。当日资讯交叉核对：央广网《10月8日A股收评》、格隆汇《A股收评：放量下跌》、同花顺收盘快讯、中国金融信息网收评、每日经济新闻涨跌停分析（2026-10-08）。所有数据为公开信息整理，仅供复盘研究参考，不构成投资建议。
+    </p>
+    <p class="foot">⚠️ 免责声明：本页面由自动化流程生成，数据可能存在延迟或口径差异。股市有风险，投资需谨慎。本内容不构成任何投资建议。</p>
+  </div>
+
+</div>
+
+<script>
+var UP = '#ef4444', DOWN = '#22c55e';
+var chartIndex = echarts.init(document.getElementById('chartIndex'));
+chartIndex.setOption({
+  grid: { left: 50, right: 30, top: 40, bottom: 40 },
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+  xAxis: { type: 'category', data: ['上证指数','深证成指','创业板指','沪深300','科创50','北证50'],
+    axisLabel: { interval: 0, fontSize: 12 } },
+  yAxis: { type: 'value', axisLabel: { formatter: '{value}%' } },
+  series: [{
+    type: 'bar', barWidth: '45%',
+    data: [
+      { value: -0.79, itemStyle: { color: DOWN } },
+      { value: -2.07, itemStyle: { color: DOWN } },
+      { value: -3.15, itemStyle: { color: DOWN } },
+      { value: -1.09, itemStyle: { color: DOWN } },
+      { value: -4.82, itemStyle: { color: DOWN } },
+      { value: -2.65, itemStyle: { color: DOWN } }
+    ],
+    label: { show: true, position: 'top', formatter: '{c}%', color: '#6b7280', fontWeight: 600 }
+  }]
+});
+
+var elastic = [
+  { n: 'N力勤', x: 74.93, y: 93.50, v: 206.59, a: 83.5 },
+  { n: '力王股份', x: 25.69, y: 31.34, v: 29.96, a: 16.8 },
+  { n: '世名科技', x: 9.90, y: 16.45, v: 20.00, a: 5.3 },
+  { n: '卓越新能', x: 5.03, y: 19.97, v: 20.00, a: 4.6 },
+  { n: '贝特利', x: 46.23, y: 17.90, v: 19.99, a: 8.3 },
+  { n: '尚水智能', x: 48.24, y: 24.77, v: 19.98, a: 6.8 },
+  { n: '领湃科技', x: 10.31, y: 21.57, v: 19.98, a: 4.1 },
+  { n: '金银河', x: 13.31, y: 19.53, v: 17.57, a: 6.4 },
+  { n: '武汉蓝电', x: 40.86, y: 29.13, v: 15.84, a: 2.7 },
+  { n: '中远海能', x: 1.01, y: 4.47, v: 10.02, a: 12.4 },
+  { n: '九阳股份', x: 1.44, y: 0.00, v: 10.00, a: 10.5 },
+  { n: '长光华芯', x: 5.83, y: 20.07, v: -20.07, a: 15.2 },
+  { n: '源杰科技', x: 4.21, y: 20.01, v: -20.01, a: 12.8 },
+  { n: '东山精密', x: 3.15, y: 10.09, v: -10.09, a: 28.6 },
+  { n: '艾力斯', x: 6.72, y: 20.02, v: -20.02, a: 8.4 }
+];
+var chartElastic = echarts.init(document.getElementById('chartElastic'));
+chartElastic.setOption({
+  grid: { left: 60, right: 40, top: 45, bottom: 55 },
+  tooltip: {
+    formatter: function(p) {
+      var d = p.data;
+      return d[3] + '<br>换手率 ' + d[0] + '% · 振幅 ' + d[1] + '%<br>涨跌幅 ' + d[2] + '% · 成交 ' + d[4] + ' 亿';
+    }
+  },
+  xAxis: { type: 'value', name: '换手率 %', nameLocation: 'middle', nameGap: 30, nameTextStyle: { fontSize: 12 } },
+  yAxis: { type: 'value', name: '振幅 %', nameTextStyle: { fontSize: 12 } },
+  series: [{
+    type: 'scatter',
+    symbolSize: function(d) { return Math.max(10, Math.min(38, d[4] * 0.55)); },
+    data: elastic.map(function(s) {
+      return { value: [s.x, s.y, s.v, s.n, s.a],
+        itemStyle: { color: s.v >= 0 ? 'rgba(239,68,68,0.75)' : 'rgba(34,197,94,0.75)',
+                     borderColor: s.v >= 0 ? '#dc2626' : '#16a34a', borderWidth: 1 } };
+    }),
+    label: { show: true, position: 'top', fontSize: 10.5, color: '#6b7280',
+      formatter: function(p) { return p.data.value[3]; } }
+  }]
+});
+window.addEventListener('resize', function() { chartIndex.resize(); chartElastic.resize(); });
+</script>
+</body>
+</html>
