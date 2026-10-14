@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A股高弹性标的每日复盘 · 2026-10-14</title>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<style>
+  :root {
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --border: #e8ecf1;
+    --text: #1f2937;
+    --text-2: #6b7280;
+    --text-3: #9ca3af;
+    --primary: #3b6ef6;
+    --radius: 14px;
+    --up: #ef4444;
+    --down: #22c55e;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 28px 20px 48px; }
+  .top {
+    background: linear-gradient(135deg, #3b6ef6 0%, #7c5cff 100%);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 20px;
+  }
+  .top h1 { font-size: 22px; font-weight: 700; }
+  .top p { font-size: 13px; opacity: 0.85; margin-top: 6px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 3px rgba(16,24,40,0.06);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .card h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 6px;
+  }
+  .badge-up { background: #fee2e2; color: #dc2626; }
+  .badge-down { background: #dcfce7; color: #16a34a; }
+  .badge-neutral { background: #f3f4f6; color: #6b7280; }
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .kpi-item {
+    background: #f8fafc;
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-align: center;
+  }
+  .kpi-label { font-size: 12px; color: var(--text-2); margin-bottom: 4px; }
+  .kpi-value { font-size: 20px; font-weight: 700; }
+  .kpi-sub { font-size: 12px; margin-top: 2px; }
+  .up { color: var(--up); }
+  .down { color: var(--down); }
+  .neutral { color: var(--text-2); }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th, td { padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--border); }
+  th { font-weight: 600; color: var(--text-2); background: #f8fafc; }
+  td { font-variant-numeric: tabular-nums; }
+  td:first-child, th:first-child { text-align: left; padding-left: 12px; }
+  tr:hover td { background: #f8fafc; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 1px 6px;
+    border-radius: 4px;
+    background: #eef2ff;
+    color: #4f46e5;
+    margin-left: 4px;
+  }
+  .chart-box { width: 100%; height: 280px; margin-top: 10px; }
+  .summary li { margin: 8px 0; padding-left: 4px; }
+  .summary b { color: var(--text); }
+  .foot { font-size: 12px; color: var(--text-3); margin-top: 18px; }
+  .ladder { display: flex; flex-direction: column; gap: 8px; }
+  .ladder-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+  .ladder-tier {
+    flex: 0 0 84px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    background: #3b6ef6;
+    border-radius: 6px;
+    text-align: center;
+    padding: 3px 0;
+  }
+  .ladder-tier.t3 { background: #7c5cff; }
+  .ladder-tier.t2 { background: #9333ea; }
+  .ladder-tier.t1 { background: #64748b; }
+  .frame-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+  .frame-item { background: #f8fafc; border-radius: 10px; padding: 14px 16px; }
+  .frame-item h3 { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .frame-item p { font-size: 12.5px; color: var(--text-2); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="top">
+    <h1>A股高弹性标的每日复盘 · 2026-10-14</h1>
+    <p>周三 · 缩量普跌日 · 数据来源：腾讯行情接口 / 东方财富涨停池接口 + 当日公开收评交叉核对 · 生成时间 2026-10-14 15:30</p>
+  </div>
+
+  <div class="card">
+    <h2>📌 结论速览 <span class="badge badge-down">缩量普跌 · 风格切换</span></h2>
+    <ul class="summary">
+      <li><b>指数全线收跌，成交缩量至 1.41 万亿：</b>沪指<b class="down">-0.88%</b>报 3767.23，深成指<b class="down">-1.97%</b>，创业板指<b class="down">-3.10%</b>，科创50<b class="down">-3.29%</b>领跌，北证50<b class="down">-0.66%</b>相对抗跌。两市成交 <b>14144 亿</b>（沪 6625 亿 + 深 7519 亿），较昨日（16759 亿）缩量约 <b class="neutral">-2615 亿（-15.6%）</b>。</li>
+      <li><b>个股普跌，亏钱效应扩散：</b>两市及北交所 978 涨 / 4490 跌 / 99 平（Wind 口径），全市场超 4400 只个股下跌；涨停 <b class="up">36</b> 只 / 炸板 <b class="neutral">24</b> / 跌停 <b class="down">10</b>，封板率仅约 60%，为近两周最低。</li>
+      <li><b>10 连板高标新华传媒（600825）今日停牌，梯队高度降至 4 板：</b>百洋股份（饲料）、慈文传媒（影视院线）、新经典（出版）3 只 4 连板并列最高；掌阅科技 7 天 4 板、德才股份 6 天 4 板、安泰集团 5 天 3 板；2 板 11 只。高位断板 + 停牌，短线情绪明显降温。</li>
+      <li><b>AI 漫剧/传媒成为唯一强主线：</b>字节旗下短剧应用 PineDrama 下载破 1 亿（日活约 700 万）催化，富春股份 20cm 回封（量比 9.43）、果麦文化 +14.49%（换手 46.3% 全场最高）、掌阅科技/电魂网络/中国科传/新华文轩涨停、芒果超媒 +6.83%。</li>
+      <li><b>AI 硬件与新能源链遭重挫：</b>CPO"易中天"齐跌——中际旭创 <b class="down">-5.73%</b>（成交 155.6 亿居两市之首）、新易盛 <b class="down">-5.84%</b>、工业富联 -6.67%、东山精密 -5.97%；风电批量跌停（大金重工 -10%、新强联 -12.51%、威力传动 -12.02%）；宁德时代 -3.11%（成交 95.2 亿第三）。</li>
+      <li><b>防御与涨价链逆势活跃：</b>油气三桶油阶段新高（WTI 站上 95 美元）、煤炭郑州煤电/安泰集团涨停（陕西煤业创历史新高、中国神华创 2007 年以来新高）、PCB 覆铜板涨价传导（满坤科技 +18.32%、超声电子 2 连板）、航运港口午后拉升（龙江交通涨停）。</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>📊 指数 KPI</h2>
+    <div class="kpi-grid">
+      <div class="kpi-item"><div class="kpi-label">上证指数</div><div class="kpi-value down">-0.88%</div><div class="kpi-sub neutral">3767.23</div></div>
+      <div class="kpi-item"><div class="kpi-label">深证成指</div><div class="kpi-value down">-1.97%</div><div class="kpi-sub neutral">12110.59</div></div>
+      <div class="kpi-item"><div class="kpi-label">创业板指</div><div class="kpi-value down">-3.10%</div><div class="kpi-sub neutral">2866.76</div></div>
+      <div class="kpi-item"><div class="kpi-label">沪深300</div><div class="kpi-value down">-1.36%</div><div class="kpi-sub neutral">4217.68</div></div>
+      <div class="kpi-item"><div class="kpi-label">科创50</div><div class="kpi-value down">-3.29%</div><div class="kpi-sub neutral">1380.26</div></div>
+      <div class="kpi-item"><div class="kpi-label">北证50</div><div class="kpi-value down">-0.66%</div><div class="kpi-sub neutral">1002.01</div></div>
+      <div class="kpi-item"><div class="kpi-label">两市成交额</div><div class="kpi-value neutral">14144 亿</div><div class="kpi-sub down">-2615 亿（-15.6%）</div></div>
+      <div class="kpi-item"><div class="kpi-label">涨跌家数</div><div class="kpi-value"><span class="up">978</span> / <span class="down">4490</span></div><div class="kpi-sub neutral">平 99 家（Wind）</div></div>
+    </div>
+    <div id="chartIndex" class="chart-box"></div>
+  </div>
+
+  <div class="card">
+    <h2>🔥 涨停 / 炸板 / 跌停统计 <span class="badge badge-down">情绪降温</span></h2>
+    <div class="kpi-grid">
+      <div class="kpi-item"><div class="kpi-label">涨停</div><div class="kpi-value up">36</div><div class="kpi-sub neutral">前日 67</div></div>
+      <div class="kpi-item"><div class="kpi-label">炸板</div><div class="kpi-value neutral">24</div><div class="kpi-sub neutral">封板率 60%</div></div>
+      <div class="kpi-item"><div class="kpi-label">跌停</div><div class="kpi-value down">10</div><div class="kpi-sub neutral">前日 8</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--text-2);margin-top:12px;">涨停行业分布：① <b>传媒/AI 漫剧</b>（8 只，最强主线）——慈文传媒（002343，4 板）、新经典（603096，4 板）、掌阅科技（603533，7 天 4 板）、电魂网络（603258）、富春股份（300299，20cm）、引力传媒（603598）、中国科传（601858）、新华文轩（601811）；② <b>能源/公用</b>（4 只）——郑州煤电（600121）、安泰集团（600408，5 天 3 板）、韶能股份（000601）、美能能源（001299）；③ <b>设备/制造</b>（5 只）——冰山冷热、哈空调（均 2 板）、星帅尔（2 板）、泰禾智能、航发科技（2 板）；④ <b>PCB/元件</b>（2 只）——超声电子（000823，2 板）、宝鼎科技（002552）。跌停池 10 只集中在风电（大金重工 002487）、玻纤（中材科技）、半导体（有研新材）、电网（远程股份）等 AI 硬件/新能源退潮方向。炸板池 24 只，高位传媒股兑现明显：丽人丽妆 -8.93%（振幅 19.96%）、龙版传媒 -3.32%、广电网络 -5.81%、亚邦股份 -5.68%。</p>
+  </div>
+
+  <div class="card">
+    <h2>🪜 连板梯队</h2>
+    <div class="ladder">
+      <div class="ladder-row"><span class="ladder-tier">4 连板</span><span><b>百洋股份（002696，饲料）、慈文传媒（002343，影视院线）、新经典（603096，出版）</b>——并列市场最高标；另有<b>掌阅科技</b> 7 天 4 板、<b>德才股份</b> 6 天 4 板（非连续）。</span></div>
+      <div class="ladder-row"><span class="ladder-tier t3">3 连板</span><span><b>醋化股份（603968，化学制品）</b>；另有安泰集团 5 天 3 板（焦炭）。</span></div>
+      <div class="ladder-row"><span class="ladder-tier t2">2 连板（11 只）</span><span><b>超声电子（元件）、冰山冷热、哈空调（通用设备）、荣丰控股、粤宏远Ａ（地产）、龙江交通（公路）、万里股份（电池）、路畅科技（汽车零部件）、金奥博（化学制品）、阳光乳业、星帅尔</b></span></div>
+      <div class="ladder-row"><span class="ladder-tier t1">首板（21 只）</span><span>集中在传媒（富春股份 20cm、电魂网络、中国科传、新华文轩、引力传媒）、能源（郑州煤电、韶能股份、美能能源）、PCB（宝鼎科技）等方向。</span></div>
+    </div>
+    <p style="font-size:13px;color:var(--text-2);margin-top:12px;">10 连板高标<b>新华传媒（600825）今日停牌</b>，实际交易的最高连板降至 4 板，且 4 板梯队题材分散（饲料/影视/出版），仅传媒具备板块纵深。昨日 3 板梯队（龙版传媒/丽人丽妆等）今日多数炸板或大跌，晋级率显著恶化；封板率 60% 为近期低位。短线情绪进入"高标缺位 + 缩量退潮"阶段，明日关注 4 板阵营能否有 1 只走出空间板，以及首板向 2 板的晋级质量。</p>
+  </div>
+
+  <div class="card">
+    <h2>⚡ 高弹性 / 高波动活跃标的</h2>
+    <table>
+      <thead><tr><th>名称 / 代码</th><th>涨跌幅</th><th>振幅</th><th>换手率</th><th>量比</th><th>成交额</th><th>看点</th></tr></thead>
+      <tbody>
+        <tr><td>富春股份 <span class="tag">300299</span></td><td class="up">+20.07%</td><td>21.82%</td><td>27.05%</td><td>9.43</td><td>12.3 亿</td><td>20cm 回封、AI 漫剧、量比全场最高之一</td></tr>
+        <tr><td>果麦文化 <span class="tag">301052</span></td><td class="up">+14.49%</td><td>26.22%</td><td>46.29%</td><td>2.72</td><td>11.9 亿</td><td>换手全场最高、3 天 2 板、振幅全场最高</td></tr>
+        <tr><td>满坤科技 <span class="tag">301132</span></td><td class="up">+18.32%</td><td>21.68%</td><td>21.68%</td><td>1.91</td><td>14.7 亿</td><td>PCB/覆铜板涨价，20cm 大阳未封板</td></tr>
+        <tr><td>双乐股份 <span class="tag">301036</span></td><td class="up">+11.40%</td><td>20.88%</td><td>15.13%</td><td>10.35</td><td>2.7 亿</td><td>量比 10.35 全场最高、颜料涨价</td></tr>
+        <tr><td>久之洋 <span class="tag">300516</span></td><td class="up">+11.91%</td><td>23.00%</td><td>9.23%</td><td>3.98</td><td>8.6 亿</td><td>高振幅、光电题材</td></tr>
+        <tr><td>晶雪节能 <span class="tag">301010</span></td><td class="up">+14.14%</td><td>16.33%</td><td>25.20%</td><td>3.44</td><td>7.1 亿</td><td>高弹性、冷链/冰雪概念</td></tr>
+        <tr><td>芒果超媒 <span class="tag">300413</span></td><td class="up">+6.83%</td><td>19.25%</td><td>14.95%</td><td>1.27</td><td>37.8 亿</td><td>短剧/AI 视频大票代表、高振幅</td></tr>
+        <tr><td>海看股份 <span class="tag">301262</span></td><td class="up">+5.88%</td><td>18.68%</td><td>33.96%</td><td>1.88</td><td>9.7 亿</td><td>高换手、IPTV/短剧</td></tr>
+        <tr><td>肯特股份 <span class="tag">301591</span></td><td class="up">+8.60%</td><td>17.77%</td><td>33.63%</td><td>2.98</td><td>6.0 亿</td><td>高换手、次新+新材料</td></tr>
+        <tr><td>凡拓数创 <span class="tag">301313</span></td><td class="up">+3.57%</td><td>13.30%</td><td>33.44%</td><td>3.97</td><td>8.9 亿</td><td>高换手、数字创意</td></tr>
+        <tr><td>时代万恒 <span class="tag">600241</span></td><td class="up">+2.72%</td><td>12.36%</td><td>36.39%</td><td>2.23</td><td>14.3 亿</td><td>高换手、电池题材反包未竟</td></tr>
+        <tr><td>建新股份 <span class="tag">300107</span></td><td class="up">+4.52%</td><td>14.02%</td><td>36.30%</td><td>4.01</td><td>11.5 亿</td><td>高换手、染料中间体</td></tr>
+        <tr><td>澳弘电子 <span class="tag">605058</span></td><td class="up">+6.11%</td><td>8.16%</td><td>16.63%</td><td>1.29</td><td>15.4 亿</td><td>PCB 老龙头温和放量</td></tr>
+        <tr><td>丽人丽妆 <span class="tag">605136</span></td><td class="down">-8.93%</td><td>19.96%</td><td>22.92%</td><td>5.31</td><td>10.3 亿</td><td>高位炸板、放量派发</td></tr>
+        <tr><td>金健米业 <span class="tag">600127</span></td><td class="up">+1.44%</td><td>10.45%</td><td>37.85%</td><td>0.90</td><td>35.7 亿</td><td>天量滞涨、派发信号</td></tr>
+        <tr><td>电科思仪 <span class="tag">301689</span></td><td class="down">-10.24%</td><td>10.03%</td><td>36.86%</td><td>1.13</td><td>14.2 亿</td><td>次新高位补跌、换手率高</td></tr>
+        <tr><td>尚水智能 <span class="tag">301513</span></td><td class="down">-8.89%</td><td>8.75%</td><td>38.48%</td><td>0.82</td><td>5.0 亿</td><td>连续高换手派发</td></tr>
+        <tr><td>C粤芯半导体-U <span class="tag">301660</span></td><td class="down">-11.70%</td><td>12.16%</td><td>44.99%</td><td>—</td><td>38.8 亿</td><td>上市次日破发大跌、次新情绪冰点</td></tr>
+        <tr><td>力勤资源 <span class="tag">001246</span></td><td class="down">-8.33%</td><td>9.33%</td><td>34.04%</td><td>0.71</td><td>18.5 亿</td><td>次新退潮、镍/能源金属</td></tr>
+        <tr><td>大金重工 <span class="tag">002487</span></td><td class="down">-10.00%</td><td>8.73%</td><td>12.18%</td><td>0.80</td><td>30.0 亿</td><td>风电跌停、放量出货</td></tr>
+      </tbody>
+    </table>
+    <div id="chartElastic" class="chart-box" style="height:320px;"></div>
+    <p style="font-size:12.5px;color:var(--text-3);margin-top:6px;">注：高弹性筛选口径为换手率 &gt;10%、振幅 &gt;8%、量比 &gt;2 三条件同时满足，今日全市场约 4607 只 A 股中筛出 <b>43 只</b>（昨日 48 只）。数据取自腾讯行情排行接口（proxy.finance.qq.com，全量分页枚举）与东方财富涨停池接口（push2ex.eastmoney.com）交叉核对，指数与成交额与澎湃/金融界当日收评核对一致。</p>
+  </div>
+
+  <div class="card">
+    <h2>🧭 弹性指标框架 · 今日读数</h2>
+    <div class="frame-grid">
+      <div class="frame-item">
+        <h3>β（贝塔）· 方向暴露</h3>
+        <p>今日高 β 成长方向全面回撤：科创50 -3.29%、创业板指 -3.10%，CPO/半导体/风电等高 β 赛道领跌，中际旭创 155.6 亿成交居两市之首仍收跌 5.73%，宁德时代 -3.11%。资金明显从高 β 硬件撤向低 β 防御（油气/煤炭/公路/水电）与事件催化的传媒方向，大小盘风格切向价值。</p>
+      </div>
+      <div class="frame-item">
+        <h3>振幅（Amplitude）· 分歧度</h3>
+        <p>今日振幅 ≥15% 的高弹性标的多为传媒与次新：果麦文化 26.22%、久之洋 23.00%、富春股份 21.82%、满坤科技 21.68%、双乐股份 20.88%、丽人丽妆 19.96%、芒果超媒 19.25%。分歧最大区域在 AI 漫剧内部——同为传媒，富春/果麦巨振上攻而龙版/广电高位巨振下杀，主线内部剧烈换筹。</p>
+      </div>
+      <div class="frame-item">
+        <h3>换手率（Turnover）· 筹码交换</h3>
+        <p>换手 ≥33% 共 9 只：果麦文化 46.29%、C粤芯 44.99%、尚水智能 38.48%、金健米业 37.85%、电科思仪 36.86%、时代万恒 36.39%、建新股份 36.30%、力勤资源 34.04%、海看股份 33.96%。收涨的高换手（果麦/海看/肯特）属主动进攻，收跌/滞涨的（粤芯/思仪/尚水/金健米业）是典型派发，次新板块整体进入退潮期。</p>
+      </div>
+      <div class="frame-item">
+        <h3>量比（Volume Ratio）· 增量观察</h3>
+        <p>两市缩量 2615 亿（-15.6%），但个股量比 ≥4 仍有 10 只：双乐股份 10.35 全场最高（2.7 亿小票极致放量）、富春股份 9.43、丽人丽妆 5.31、美农生物 5.39、元隆雅图 5.13。缩量环境下增量资金高度集中，只够喂养单一主线（AI 漫剧），无法支撑普涨，量能结构性特征极强。</p>
+      </div>
+    </div>
+    <p style="font-size:13px;color:var(--text-2);margin-top:12px;"><b>明日（10/15）策略提示：</b>① 沪指 3767 已贴近 3800 下方平台，创业板/科创 50 三连跌后短期超卖，观察能否缩量止跌，弱反弹优先减仓高 β 硬件；② 高标停牌 + 梯队降至 4 板，短线情绪退潮期，控制打板仓位，优先观察首板晋级 2 板的质量；③ AI 漫剧是唯一有板块纵深的主线，但内部分化剧烈，只做低吸分歧、不追高位一致；④ 油气/煤炭等涨价防御链若与指数再度背离走强，可视为避险资金持续在场信号；⑤ 次新股（粤芯、思仪、尚水、力勤）批量派发，短期回避；⑥ 关注明日能否放量收复 3800，若继续缩量阴跌则防御风格延续。</p>
+  </div>
+
+  <div class="card">
+    <h2>📚 数据来源与口径</h2>
+    <p style="font-size:12.5px;color:var(--text-2);">
+      指数行情：腾讯行情接口（qt.gtimg.cn）实测，北证50 同源（bj899050）。成交额：沪深两市合计 14144 亿（沪 6625 亿 + 深 7519 亿），较前日 16759 亿缩量 2615 亿，与澎湃新闻/金融界当日收评核对一致。涨跌家数：Wind 口径 978 涨 / 4490 跌 / 99 平（含北交所，澎湃新闻引述）。涨停/炸板/跌停池：东方财富涨停池接口（push2ex.eastmoney.com），涨停 36 / 炸板 24 / 跌停 10。高弹性扫描：腾讯排行接口（proxy.finance.qq.com）全量分页枚举 4607 只，筛出换手&gt;10%/振幅&gt;8%/量比&gt;2 标的 43 只。主线与消息面（PineDrama 破 1 亿下载、覆铜板涨价、WTI 破 95 美元等）来自金融界/澎湃/新浪当日收评交叉核对。所有数据为公开信息整理，仅供复盘研究参考，不构成投资建议。
+    </p>
+    <p class="foot">⚠️ 免责声明：本页面由自动化流程生成，数据可能存在延迟或口径差异。股市有风险，投资需谨慎。本内容不构成任何投资建议。</p>
+  </div>
+
+</div>
+
+<script>
+var UP = '#ef4444', DOWN = '#22c55e';
+var chartIndex = echarts.init(document.getElementById('chartIndex'));
+chartIndex.setOption({
+  grid: { left: 50, right: 30, top: 40, bottom: 40 },
+  tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+  xAxis: { type: 'category', data: ['上证指数','深证成指','创业板指','沪深300','科创50','北证50'],
+    axisLabel: { interval: 0, fontSize: 12 } },
+  yAxis: { type: 'value', axisLabel: { formatter: '{value}%' } },
+  series: [{
+    type: 'bar', barWidth: '45%',
+    data: [
+      { value: -0.88, itemStyle: { color: '#ef4444' } },
+      { value: -1.97, itemStyle: { color: '#22c55e' } },
+      { value: -3.10, itemStyle: { color: '#22c55e' } },
+      { value: -1.36, itemStyle: { color: '#22c55e' } },
+      { value: -3.29, itemStyle: { color: '#22c55e' } },
+      { value: -0.66, itemStyle: { color: '#22c55e' } }
+    ],
+    label: { show: true, position: 'bottom', formatter: '{c}%', color: '#6b7280', fontWeight: 600 }
+  }]
+});
+
+var elastic = [
+  { n: '富春股份', x: 27.05, y: 21.82, v: 20.07, a: 12.3 },
+  { n: '果麦文化', x: 46.29, y: 26.22, v: 14.49, a: 11.9 },
+  { n: '满坤科技', x: 21.68, y: 21.68, v: 18.32, a: 14.7 },
+  { n: '双乐股份', x: 15.13, y: 20.88, v: 11.40, a: 2.7 },
+  { n: '久之洋', x: 9.23, y: 23.00, v: 11.91, a: 8.6 },
+  { n: '晶雪节能', x: 25.20, y: 16.33, v: 14.14, a: 7.1 },
+  { n: '芒果超媒', x: 14.95, y: 19.25, v: 6.83, a: 37.8 },
+  { n: '海看股份', x: 33.96, y: 18.68, v: 5.88, a: 9.7 },
+  { n: '肯特股份', x: 33.63, y: 17.77, v: 8.60, a: 6.0 },
+  { n: '凡拓数创', x: 33.44, y: 13.30, v: 3.57, a: 8.9 },
+  { n: '时代万恒', x: 36.39, y: 12.36, v: 2.72, a: 14.3 },
+  { n: '建新股份', x: 36.30, y: 14.02, v: 4.52, a: 11.5 },
+  { n: '丽人丽妆', x: 22.92, y: 19.96, v: -8.93, a: 10.3 },
+  { n: '金健米业', x: 37.85, y: 10.45, v: 1.44, a: 35.7 },
+  { n: '电科思仪', x: 36.86, y: 10.03, v: -10.24, a: 14.2 },
+  { n: '尚水智能', x: 38.48, y: 8.75, v: -8.89, a: 5.0 },
+  { n: 'C粤芯半导体', x: 44.99, y: 12.16, v: -11.70, a: 38.8 },
+  { n: '力勤资源', x: 34.04, y: 9.33, v: -8.33, a: 18.5 },
+  { n: '大金重工', x: 12.18, y: 8.73, v: -10.00, a: 30.0 },
+  { n: '澳弘电子', x: 16.63, y: 8.16, v: 6.11, a: 15.4 },
+];
+var chartElastic = echarts.init(document.getElementById('chartElastic'));
+chartElastic.setOption({
+  grid: { left: 60, right: 40, top: 45, bottom: 55 },
+  tooltip: {
+    formatter: function(p) {
+      var d = p.data;
+      return d[3] + '<br>换手率 ' + d[0] + '% · 振幅 ' + d[1] + '%<br>涨跌幅 ' + d[2] + '% · 成交 ' + d[4] + ' 亿';
+    }
+  },
+  xAxis: { type: 'value', name: '换手率 %', nameLocation: 'middle', nameGap: 30, nameTextStyle: { fontSize: 12 } },
+  yAxis: { type: 'value', name: '振幅 %', nameTextStyle: { fontSize: 12 } },
+  series: [{
+    type: 'scatter',
+    symbolSize: function(d) { return Math.max(10, Math.min(38, d[4] * 0.35)); },
+    data: elastic.map(function(s) {
+      return { value: [s.x, s.y, s.v, s.n, s.a],
+        itemStyle: { color: s.v >= 0 ? 'rgba(239,68,68,0.75)' : 'rgba(34,197,94,0.75)',
+                     borderColor: s.v >= 0 ? '#dc2626' : '#16a34a', borderWidth: 1 } };
+    }),
+    label: { show: true, position: 'top', fontSize: 10.5, color: '#6b7280',
+      formatter: function(p) { return p.data.value[3]; } }
+  }]
+});
+window.addEventListener('resize', function() { chartIndex.resize(); chartElastic.resize(); });
+</script>
+</body>
+</html>
